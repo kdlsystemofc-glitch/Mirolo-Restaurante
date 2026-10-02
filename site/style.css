@@ -583,18 +583,18 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 1px solid rgba(195, 180, 160, 0.4);
+  border-bottom: 1px solid rgba(195, 180, 160, 0.5);
   padding-bottom: 6px;
   margin-bottom: var(--space-3);
 }
 .review-card__type {
   font-family: var(--font-script);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--c-brown-dark);
 }
 .review-card__rating {
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.775rem;
   font-weight: 700;
   color: var(--c-gold-text);
   letter-spacing: 0.04em;
