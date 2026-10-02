@@ -724,3 +724,6 @@
   background: var(--c-text-body);
   color: #FFFDF9;
 }
+.footer__btn-reserve:active {
+  transform: scale(0.98);
+}
