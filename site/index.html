@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mirolo Restaurante — Self-service por kg com comida caseira em São Bernardo do Campo. R. Esperico, 60 - Jardim do Mar. Segunda a sábado das 11:30 às 15:00.">
+  <title>Mirolo Restaurante — O Almoço com Alma de Domingo</title>
+
+  <!-- Preconnect fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 01 — HERO
+  ══════════════════════════════════════════════════ -->
+  <header id="hero" class="hero" role="banner">
+    <div class="container hero__inner">
+
+      <!-- Barra superior: logo centralizado e badge horário -->
+      <div class="hero__top-bar">
+        <div class="hero__logo">
+          <img src="assets/logo.png"
+               alt="Mirolo Restaurante"
+               width="150" height="150">
+        </div>
+
+        <div class="hero__badge" aria-label="Horário de funcionamento: almoço das 11:30 às 15:00">
+          <span class="hero__badge-label">Almoço das</span>
+          <strong>11:30 às 15:00</strong>
+        </div>
+      </div>
+
+      <!-- Título Principal -->
+      <div class="hero__headline-wrap">
+        <h1 class="hero__headline">
+          Mirolo // O Almoço<br>
+          Com Alma de Domingo
+        </h1>
+        <!-- PENDÊNCIA-CLIENTE: Slogan de referência do mockup; validar se adota este ou o da fachada ("Comida Caseira. Venha Experimentar.") -->
+      </div>
+
+      <!-- Composição central com prato e receitas -->
+      <div class="hero__composition">
+
+        <!-- Nota esquerda (Receita) -->
+        <aside class="recipe-note lined-paper recipe-note--left" aria-hidden="true">
+          <span class="tape" style="top:-10px; left:25%; transform:rotate(-3deg);"></span>
+          <p class="recipe-note__title">Recipe de família</p>
+          <ul class="recipe-note__list">
+            <li>Feijoada completa</li>
+            <li>Torresmo crocante</li>
+            <li>Arroz e couve fresca</li>
+            <li>Bolinho de espinafre</li>
+          </ul>
+          <p class="recipe-note__author">by Chef Robson D'Vieira</p>
+        </aside>
+
+        <!-- Prato central hero -->
+        <div class="hero__food-img-wrap">
+          <picture>
+            <source media="(min-width: 800px)" srcset="assets/hero-food-1600.webp" type="image/webp">
+            <img src="assets/hero-food-800.webp"
+                 alt="Feijoada completa servida na panela de barro com torresmo e bolinhos de espinafre"
+                 loading="eager"
+                 fetchpriority="high"
+                 width="800" height="600">
+          </picture>
+        </div>
+
+        <!-- Nota direita (Receita do chef) -->
+        <aside class="recipe-note lined-paper recipe-note--right" aria-hidden="true">
+          <span class="tape" style="top:-10px; right:20%; transform:rotate(5deg);"></span>
+          <p class="recipe-note__title">Receita do chef</p>
+          <ul class="recipe-note__list">
+            <li>1 dose de amor</li>
+            <li>1 toque de carinho</li>
+            <li>Bolinho de espinafre</li>
+            <li>Sobremesa caseira</li>
+          </ul>
+        </aside>
+
+        <!-- Carimbo SOBREMESA CORTESIA -->
+        <div class="hero__stamp stamp" aria-hidden="true">
+          Sobremesa<br>Cortesia
+        </div>
+
+      </div><!-- /.hero__composition -->
+
+    </div><!-- /.hero__inner -->
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 02 — O CADERNO SECRETO (BOLINHO DE ESPINAFRE)
+  ══════════════════════════════════════════════════ -->
+  <section id="bolinho" class="bolinho" aria-labelledby="bolinho-title">
+    <div class="container bolinho__inner">
+
+      <header class="section-tag">
+        <h2 id="bolinho-title" class="section-tag__heading">
+          O Caderno Secreto (Bolinho de Espinafre)
+        </h2>
+      </header>
+
+      <!-- Livro aberto de receitas -->
+      <div class="cookbook">
+        <span class="tape cookbook__tape-tl"></span>
+        <span class="tape cookbook__tape-tr"></span>
+        <span class="tape cookbook__tape-b"></span>
+
+        <div class="cookbook__spread">
+
+          <!-- Página Esquerda: Foto do bolinho + recibo + badge -->
+          <div class="cookbook__page cookbook__page--left">
+            <div class="cookbook__photo-wrap">
+              <picture>
+                <source media="(min-width: 800px)" srcset="assets/bolinho-1600.webp" type="image/webp">
+                <img src="assets/bolinho-800.webp"
+                     alt="Bolinhos de espinafre quentes e fumegantes, servidos na tábua de madeira"
+                     loading="lazy"
+                     width="600" height="600">
+              </picture>
+
+              <!-- Recibo de papel amarelo -->
+              <div class="receipt" aria-hidden="true">
+                <span class="receipt__title">Bakery Receipt</span>
+                <span class="receipt__line">Espinafre fresco</span>
+                <span class="receipt__line">Massa artesanal</span>
+                <span class="receipt__line">Feito na hora</span>
+                <div class="receipt__barcode"></div>
+              </div>
+
+              <!-- Badge 26+ menções no Google -->
+              <div class="mentions-badge" aria-label="Mais de 26 menções nas avaliações do Google">
+                <strong>26+ Menções</strong>
+                <span>no Google</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Página Direita: Ingredientes secretos e citação -->
+          <div class="cookbook__page cookbook__page--right lined-paper">
+            <div class="cookbook__recipe-content">
+              <h3 class="cookbook__recipe-title">Secret ingredients</h3>
+
+              <ul class="cookbook__ingredients-list">
+                <li>Cesto de espinafre colhido no dia</li>
+                <li>Bolinho de espinafre moldado à mão</li>
+                <li>Massa crocante por fora, cremosa por dentro</li>
+                <li>Caldo caseiro com tempero de família</li>
+                <li>Amor e dedicação em cada fornada</li>
+              </ul>
+
+              <blockquote class="cookbook__quote">
+                "O bolinho de espinafre e o merengue de morango... são incríveis."
+                <cite>— Kelly Petrussi (Local Guide no Google)</cite>
+              </blockquote>
+
+              <!-- Carimbo RECEITA DO CHEF -->
+              <div class="cookbook__stamp stamp stamp--chef" aria-hidden="true">
+                Receita<br>do Chef
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.cookbook__spread -->
+      </div><!-- /.cookbook -->
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 03 — O BUFFET COLORIDO
+  ══════════════════════════════════════════════════ -->
+  <section id="buffet" class="buffet" aria-labelledby="buffet-title">
+    <div class="container buffet__inner">
+
+      <header class="section-tag">
+        <h2 id="buffet-title" class="section-tag__heading">
+          O Buffet Colorido
+        </h2>
+      </header>
+
+      <!-- Carrossel / grid de polaroids de fotos reais -->
+      <div class="polaroid-row">
+
+        <!-- Polaroid 1: Salada Colorida -->
+        <figure class="polaroid polaroid--tilt-left" style="--rot: -2.5deg;">
+          <span class="pushpin pushpin--wood"></span>
+          <div class="polaroid__img-wrap">
+            <picture>
+              <source media="(min-width: 800px)" srcset="assets/buffet-salada-1600.webp" type="image/webp">
+              <img src="assets/buffet-salada-800.webp"
+                   alt="Buffet de saladas coloridas com verduras frescas, cebola roxa e legumes"
+                   loading="lazy" width="400" height="400">
+            </picture>
+          </div>
+          <figcaption class="polaroid__caption">Salad Bar Fresco</figcaption>
+        </figure>
+
+        <!-- Polaroid 2: Chef Robson Merengue -->
+        <figure class="polaroid polaroid--tilt-right polaroid--highlight" style="--rot: 2deg;">
+          <span class="pushpin pushpin--red"></span>
+          <div class="polaroid__img-wrap">
+            <picture>
+              <source media="(min-width: 800px)" srcset="assets/chef-merengue-1600.webp" type="image/webp">
+              <img src="assets/chef-merengue-800.webp"
+                   alt="Chef Robson D'Vieira com travessa de merengue com morangos frescos"
+                   loading="lazy" width="400" height="400">
+            </picture>
+          </div>
+          <figcaption class="polaroid__caption">Chef Robson D'Vieira</figcaption>
+        </figure>
+
+        <!-- Polaroid 3: Pratos Quentes -->
+        <figure class="polaroid polaroid--tilt-left" style="--rot: -1.5deg;">
+          <span class="pushpin pushpin--wood"></span>
+          <div class="polaroid__img-wrap">
+            <picture>
+              <source media="(min-width: 800px)" srcset="assets/buffet-quentes-1600.webp" type="image/webp">
+              <img src="assets/buffet-quentes-800.webp"
+                   alt="Buffet de pratos quentes com carnes, feijoada e torresmo"
+                   loading="lazy" width="400" height="400">
+            </picture>
+          </div>
+          <figcaption class="polaroid__caption">Pratos Quentes</figcaption>
+        </figure>
+
+        <!-- Polaroid 4: Chef Fachada Externa -->
+        <figure class="polaroid polaroid--tilt-right" style="--rot: 3deg;">
+          <span class="pushpin pushpin--red"></span>
+          <div class="polaroid__img-wrap">
+            <picture>
+              <source media="(min-width: 800px)" srcset="assets/chef-blue-ext-1600.webp" type="image/webp">
+              <img src="assets/chef-blue-ext-800.webp"
+                   alt="Chef na entrada do restaurante Mirolo pronto para receber os clientes"
+                   loading="lazy" width="400" height="400">
+            </picture>
+          </div>
+          <figcaption class="polaroid__caption">Bem-vindo ao Mirolo</figcaption>
+        </figure>
+
+        <!-- Polaroid 5: Torresmo Sequinho -->
+        <figure class="polaroid polaroid--tilt-left" style="--rot: -2deg;">
+          <span class="pushpin pushpin--wood"></span>
+          <div class="polaroid__img-wrap">
+            <picture>
+              <source media="(min-width: 800px)" srcset="assets/buffet-torresmo-1600.webp" type="image/webp">
+              <img src="assets/buffet-torresmo-800.webp"
+                   alt="Porção de torresmo sequinho e crocante servido no buffet"
+                   loading="lazy" width="400" height="400">
+            </picture>
+          </div>
+          <figcaption class="polaroid__caption">Torresmo Crocante</figcaption>
+        </figure>
+
+      </div><!-- /.polaroid-row -->
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 04 — PROVA SOCIAL AFETIVA
+  ══════════════════════════════════════════════════ -->
+  <section id="depoimentos" class="depoimentos" aria-labelledby="depoimentos-title">
+    <div class="container depoimentos__inner">
+
+      <header class="section-tag">
+        <h2 id="depoimentos-title" class="section-tag__heading">
+          Prova Social Afetiva
+        </h2>
+      </header>
+
+      <!-- Cartões de depoimentos estilo caderno com fita adesiva -->
+      <div class="reviews-row">
+
+        <!-- Depoimento 1: João Vitor Malafaia -->
+        <article class="review-card lined-paper" style="--rot: -2deg;">
+          <span class="tape review-card__tape"></span>
+          <div class="review-card__header">
+            <span class="review-card__type">Recipe note</span>
+            <span class="review-card__rating">4.8 Google stars</span>
+          </div>
+          <blockquote class="review-card__quote">
+            "Mais uma vez indo ao Mirolo, dessa vez na unidade antiga. Muito bom como sempre e o merengue e o mousse de chocolate cortesia dão o toque especial."
+          </blockquote>
+          <cite class="review-card__author">- João Vitor Malafaia (Local Guide)</cite>
+        </article>
+
+        <!-- Depoimento 2: Kelly Petrussi (destaque central com carimbo circular 615 reviews) -->
+        <article class="review-card lined-paper review-card--featured" style="--rot: 1deg;">
+          <span class="tape review-card__tape"></span>
+          <div class="review-card__header">
+            <span class="review-card__type">Recipe review</span>
+            <span class="review-card__rating">4.8 Google stars</span>
+          </div>
+          <blockquote class="review-card__quote">
+            "SENSACIONAL!!! Almoço lá sempre, comida de primeira, atendimento excelente, limpeza e organização sem igual, eu amo esse lugar, o bolinho de espinafre e o merengue de morango... são incríveis."
+          </blockquote>
+          <cite class="review-card__author">- Kelly Petrussi (Local Guide)</cite>
+
+          <!-- Carimbo redondo 615 reviews -->
+          <div class="review-card__stamp-round stamp stamp--round" aria-hidden="true">
+            <span style="font-size: 0.65rem; line-height: 1;">SOBREMESA</span>
+            <strong style="font-size: 1.15rem; font-weight: 700; line-height: 1;">615</strong>
+            <span style="font-size: 0.65rem; line-height: 1;">REVIEWS</span>
+          </div>
+        </article>
+
+        <!-- Depoimento 3: Maria Fernanda Lisauskas -->
+        <article class="review-card lined-paper" style="--rot: -1.5deg;">
+          <span class="tape review-card__tape"></span>
+          <div class="review-card__header">
+            <span class="review-card__type">Recipe review</span>
+            <span class="review-card__rating">615 reviews</span>
+          </div>
+          <blockquote class="review-card__quote">
+            "Sem dúvidas meu self-service favorito do mundo! A família está sempre presente, muito simpáticos, sorridentes, atendimento dos demais funcionários também é impecável. A comida é incrível, o buffet de saladas com muita variedade."
+          </blockquote>
+          <cite class="review-card__author">- Maria Fernanda Lisauskas</cite>
+
+          <!-- Carimbo RECEITA DO CHEF -->
+          <div class="review-card__stamp-rect stamp stamp--chef" aria-hidden="true">
+            Receita<br>do Chef
+          </div>
+        </article>
+
+      </div><!-- /.reviews-row -->
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 05 — FOOTER
+  ══════════════════════════════════════════════════ -->
+  <footer id="footer-main" class="footer" role="contentinfo">
+
+    <!-- Faixa superior terracota -->
+    <div class="footer__banner">
+      <span>FOOTER</span>
+    </div>
+
+    <!-- Corpo inferior em madeira clara -->
+    <div class="footer__body">
+      <div class="container footer__inner">
+
+        <!-- Endereço e Telefone -->
+        <address class="footer__contact">
+          <p class="footer__address">
+            R. Esperico, 60 - Jardim do Mar, São Bernardo do Campo - SP
+          </p>
+          <p class="footer__phone">
+            Telefone: <a href="tel:+551127582354">(11) 2758-2354</a>
+          </p>
+        </address>
+
+        <!-- Botão Reservar Almoço // WhatsApp -->
+        <div class="footer__action">
+          <a href="tel:+551127582354"
+             class="footer__btn-reserve"
+             aria-label="Reservar almoço pelo telefone ou WhatsApp">
+            [ RESERVAR ALMOÇO // WHATSAPP ]
+          </a>
+        </div>
+
+      </div><!-- /.footer__inner -->
+    </div><!-- /.footer__body -->
+
+  </footer>
+
+</body>
+</html>

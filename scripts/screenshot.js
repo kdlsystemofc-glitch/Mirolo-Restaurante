@@ -1,8 +1,6 @@
 // scripts/screenshot.js
-// Usage: node scripts/screenshot.js [sectionId]
-// sectionId: hero | bolinho | buffet | depoimentos | footer | full
-// Captures section + full page at 1440 and 390px, saves to screenshots/
-
+// Usage: node scripts/screenshot.js <sectionName>
+// sectionName: hero | bolinho | buffet | depoimentos | footer | all
 const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
@@ -14,50 +12,90 @@ fs.mkdirSync(SCREENSHOTS, { recursive: true });
 const FILE = `file://${path.join(ROOT, 'site', 'index.html').replace(/\\/g, '/')}`;
 const WIDTHS = [1440, 390];
 
-const SECTIONS = {
-  hero:         '#hero',
-  bolinho:      '#bolinho',
-  buffet:       '#buffet',
-  depoimentos:  '#depoimentos',
-  footer:       '#footer-main',
-  full:         null,
+const SECTION_CONFIG = {
+  hero: {
+    selector: '#hero',
+    prevSelector: null
+  },
+  bolinho: {
+    selector: '#bolinho',
+    prevSelector: '#hero'
+  },
+  buffet: {
+    selector: '#buffet',
+    prevSelector: '#bolinho'
+  },
+  depoimentos: {
+    selector: '#depoimentos',
+    prevSelector: '#buffet'
+  },
+  footer: {
+    selector: '#footer-main',
+    prevSelector: '#depoimentos'
+  }
 };
 
-const target = process.argv[2] || 'full';
-const selector = SECTIONS[target];
+const target = process.argv[2] || 'all';
 
-(async () => {
+async function run() {
   const browser = await chromium.launch();
-  const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  const list = target === 'all' ? Object.keys(SECTION_CONFIG) : [target];
 
-  for (const width of WIDTHS) {
-    const page = await browser.newPage();
-    await page.setViewportSize({ width, height: 900 });
-    await page.goto(FILE, { waitUntil: 'networkidle' });
+  for (const name of list) {
+    const cfg = SECTION_CONFIG[name];
+    if (!cfg) continue;
 
-    // Full page always
-    await page.screenshot({
-      path: path.join(SCREENSHOTS, `${stamp}_full_${width}.png`),
-      fullPage: true,
-    });
-    console.log(`📸 full page ${width}px saved`);
+    for (const w of WIDTHS) {
+      const page = await browser.newPage();
+      await page.setViewportSize({ width: w, height: 900 });
+      await page.goto(FILE, { waitUntil: 'networkidle' });
 
-    // Section if requested
-    if (selector) {
-      try {
-        const el = page.locator(selector);
+      // 1. Isolated section
+      const el = page.locator(cfg.selector);
+      if (await el.count() > 0) {
         await el.screenshot({
-          path: path.join(SCREENSHOTS, `${stamp}_${target}_${width}.png`),
+          path: path.join(SCREENSHOTS, `${name}_${w}_isolated.png`)
         });
-        console.log(`📸 ${target} ${width}px saved`);
-      } catch (e) {
-        console.warn(`⚠️ Could not screenshot ${selector}: ${e.message}`);
+        console.log(`📸 ${name} ${w}px isolated saved`);
       }
-    }
 
-    await page.close();
+      // 2. Full page
+      await page.screenshot({
+        path: path.join(SCREENSHOTS, `${name}_${w}_full.png`),
+        fullPage: true
+      });
+      console.log(`📸 ${name} ${w}px full saved`);
+
+      // 3. Seam / transition with previous section
+      if (cfg.prevSelector) {
+        try {
+          const prevBox = await page.locator(cfg.prevSelector).boundingBox();
+          const currBox = await page.locator(cfg.selector).boundingBox();
+          if (prevBox && currBox) {
+            const clipY = Math.max(0, currBox.y - 250);
+            const clipH = Math.min(500, currBox.y + 250 - clipY);
+            await page.screenshot({
+              path: path.join(SCREENSHOTS, `${name}_${w}_seam.png`),
+              clip: {
+                x: 0,
+                y: clipY,
+                width: w,
+                height: clipH
+              }
+            });
+            console.log(`📸 ${name} ${w}px seam saved`);
+          }
+        } catch (err) {
+          console.warn(`Seam screenshot error: ${err.message}`);
+        }
+      }
+
+      await page.close();
+    }
   }
 
   await browser.close();
-  console.log('✅ Done. Screenshots in ./screenshots/');
-})();
+  console.log('Done with screenshots.');
+}
+
+run();

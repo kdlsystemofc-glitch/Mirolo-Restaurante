@@ -1,0 +1,62 @@
+/* tokens.css — Mirolo Restaurante — Design System
+   Gerado a partir do DESIGN.md. */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+
+:root {
+  /* ── Cores Principais ───────────────────────────── */
+  --c-cream:           #F7EFE1;
+  --c-canvas-bg:       #EFE7D8;
+  --c-brown-dark:      #4A230D;
+  --c-brown-mid:       #7A3E1D;
+  --c-terracotta:      #8F361F;
+  --c-terracotta-bar:  #BC4E32;
+  --c-gold:            #C8882A;       /* decorativo apenas */
+  --c-gold-text:       #8B5E10;       /* texto sobre cream — WCAG AA */
+  --c-olive:           #4A5C1A;
+  --c-red-stamp:       #A8231E;
+  --c-paper:           #FFFDF9;
+  --c-paper-yellow:    #F6E9A8;
+  --c-text-body:       #301E13;
+  --c-text-muted:      #6A5445;
+  --c-wood-light:      #E4CBAB;
+  --c-wood-mid:        #BFA07A;
+  --c-wood-dark:       #7A5833;
+  --c-white:           #FFFFFF;
+  --c-dark-bg:         #23140C;
+
+  /* ── Tipografia ─────────────────────────────────── */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-script:  'Great Vibes', cursive;
+  --font-body:    'Lato', system-ui, sans-serif;
+
+  /* ── Tamanhos fluidos ───────────────────────────── */
+  --text-xs:   clamp(0.7rem,  1.2vw,  0.825rem);
+  --text-sm:   clamp(0.85rem, 1.6vw,  0.95rem);
+  --text-base: clamp(0.95rem, 2vw,    1.075rem);
+  --text-lg:   clamp(1.1rem,  2.5vw,  1.3rem);
+  --text-xl:   clamp(1.3rem,  3.2vw,  1.65rem);
+  --text-2xl:  clamp(1.6rem,  4.2vw,  2.2rem);
+  --text-3xl:  clamp(2.1rem,  5.5vw,  3rem);
+  --text-hero: clamp(2.2rem,  6.5vw,  4.2rem);
+
+  /* ── Espaçamentos ───────────────────────────────── */
+  --space-1:  clamp(0.25rem, 0.8vw, 0.4rem);
+  --space-2:  clamp(0.5rem,  1.2vw, 0.75rem);
+  --space-3:  clamp(0.75rem, 1.8vw, 1.25rem);
+  --space-4:  clamp(1rem,    2.5vw, 1.75rem);
+  --space-6:  clamp(1.5rem,  3.5vw, 2.5rem);
+  --space-8:  clamp(2rem,    4.5vw, 3.5rem);
+  --space-12: clamp(2.8rem,  6vw,   5rem);
+
+  /* ── Layout ─────────────────────────────────────── */
+  --max-w:     1180px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 9999px;
+
+  /* ── Sombras ────────────────────────────────────── */
+  --shadow-paper: 0 4px 15px rgba(50, 28, 12, 0.12), 0 1px 3px rgba(50, 28, 12, 0.08);
+  --shadow-card:  0 8px 24px rgba(45, 24, 10, 0.16);
+  --shadow-polaroid: 0 6px 18px rgba(35, 20, 12, 0.22);
+}

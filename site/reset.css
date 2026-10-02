@@ -1,0 +1,119 @@
+/* reset.css — Mirolo Restaurante */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--c-text-body);
+  background-color: var(--c-cream);
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* Fundo sutil de tecido/papel texturizado */
+  background-image:
+    radial-gradient(#d8ccba 0.75px, transparent 0.75px),
+    radial-gradient(#d8ccba 0.75px, var(--c-cream) 0.75px);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+img, picture, video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--c-terracotta); outline-offset: 3px; border-radius: 2px; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+.container {
+  width: min(var(--max-w), 100% - 2 * var(--space-4));
+  margin-inline: auto;
+}
+
+/* Fita adesiva / Masking tape */
+.tape {
+  display: block;
+  width: 72px;
+  height: 22px;
+  background: rgba(228, 204, 153, 0.75);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  border-radius: 1px;
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+}
+.tape::before, .tape::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 4px;
+  background: repeating-linear-gradient(to bottom, transparent, transparent 2px, rgba(160,130,80,0.15) 2px, rgba(160,130,80,0.15) 4px);
+}
+.tape::before { left: 0; }
+.tape::after { right: 0; }
+
+/* Carimbo estilizado (Stamp) */
+.stamp {
+  display: inline-block;
+  border: 2.5px solid var(--c-red-stamp);
+  color: var(--c-red-stamp);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: var(--text-xs);
+  line-height: 1.15;
+  text-align: center;
+  box-shadow: 0 0 0 1px rgba(168, 35, 30, 0.2);
+  user-select: none;
+  opacity: 0.88;
+}
+
+.stamp--round {
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+/* Folha de caderno pautada */
+.lined-paper {
+  background-color: var(--c-paper);
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 23px,
+    rgba(195, 180, 160, 0.45) 23px,
+    rgba(195, 180, 160, 0.45) 24px
+  );
+  background-size: 100% 24px;
+  box-shadow: var(--shadow-paper);
+  border-radius: 2px;
+}
