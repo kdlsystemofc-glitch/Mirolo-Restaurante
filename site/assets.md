@@ -14,9 +14,12 @@ Gerado em 2026-10-02T14:33:36.733Z
 | buffet-quentes | OK | imagens/imgi_43_... *(foto real tratada/crop)* | buffet-quentes-600.webp, buffet-quentes-800.webp |
 | chef-blue-ext | OK | imagens/imgi_18_... *(foto real tratada/crop)* | chef-blue-ext-600.webp, chef-blue-ext-800.webp |
 | buffet-torresmo | OK | imagens/imgi_30_... *(foto real tratada/crop)* | buffet-torresmo-600.webp, buffet-torresmo-800.webp |
-| sobremesas | OK | imagens/imgi_40_... *(foto real tratada/crop)* | sobremesas-600.webp, sobremesas-800.webp |
+| texture-linen | OK | design/plates/plate-textura-linho.jpg *(linho cru tátil)* | texture-linen.webp |
+| texture-wood-table | OK | design/plates/plate-madeira-hero.png *(bancada carvalho rústico)* | texture-wood-table-1600.webp, texture-wood-table-800.webp |
 
 ## Notas
+- `plate-textura-linho.jpg`: Trama de linho natural cru com nós orgânicos, aplicada como textura de fundo de toda a página.
+- `plate-madeira-hero.png`: Bancada de carvalho e nogueira com iluminação quente de taverna, servindo de tampo contínuo onde os pratos da feijoada se fundem sem moldura retangular.
 - `plate-hero-perspective.jpg`: Foto em ângulo de 35° assentada na tábua de madeira rústica com a feijoada borbulhante, torresmo e bolinhos.
 - `plate-recipe-sketch.jpg`: Folha espiral pautada com croquis e receitas culinárias a lápis, vazando pela lateral do livro.
 - Todas as 7 fotos de buffet tiveram os 12% inferiores cortados para eliminação completa das marcas d'água do Instagram e receberam saturação e brilho reforçados para apetite visual.

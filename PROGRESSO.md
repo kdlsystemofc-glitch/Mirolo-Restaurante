@@ -71,3 +71,19 @@ c3deace bolinho pronta
 4. **Remoção de Placeholders**:
    - Faixa terracota do rodapé convertida em friso decorativo limpo, eliminando o texto placeholder "FOOTER".
 
+---
+
+## 5. Rodada Final de Integração Orgânica e Matéria Física Real (Plates de Textura)
+
+1. **Texturas Reais Integradas**:
+   - `plate-textura-linho.jpg` ➔ `site/assets/texture-linen.webp`: Trama real de tecido de linho cru com fibras visíveis aplicada como fundo de toda a página, substituindo padrões computacionais de CSS.
+   - `plate-madeira-hero.png` ➔ `site/assets/texture-wood-table-1600.webp` e `800.webp`: Superfície panorâmica de tábuas de carvalho rústico com veios horizontais e iluminação quente de taverna.
+2. **Integração das Imagens (Fim das "Caixas Brutas / Coladas")**:
+   - **Hero**: A foto da feijoada recebeu máscara elíptica de degradê suave nas bordas laterais e superiores (`mask-image: radial-gradient`), fundindo a madeira da foto na bancada do site sem NENHUMA borda retangular ou moldura.
+   - **Notas do Hero**: As notas ("Recipe de família" e "Receita do chef") agora cruzam a linha do horizonte entre a parede de linho e a bancada de madeira, presas com fita crepe rasgada à mão.
+   - **Fita Crepe Artesanal**: Recorte denteado em zigue-zague nas pontas (`clip-path`) simulando fita puxada do rolo manualmente, com fibras longitudinais e transparência.
+   - **Recibo Amarelo**: Base recortada com dentes de impressora térmica (`clip-path`).
+   - **Tachinhas 3D**: Esferas com reflexo especular de luz branca pura e sombra oblíqua projetada sobre a foto e sobre o linho.
+   - **Carimbos**: Efeito de desgaste e porosidade de almofada de tinta de borracha em papel kraft.
+
+
