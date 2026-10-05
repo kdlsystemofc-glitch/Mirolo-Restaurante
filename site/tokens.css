@@ -25,10 +25,10 @@
   --c-white:           #FFFFFF;
   --c-dark-bg:         #23140C;
 
-  /* ── Tipografia ─────────────────────────────────── */
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-script:  'Great Vibes', cursive;
-  --font-body:    'Lato', system-ui, sans-serif;
+  /* ── Tipografia com fallbacks robustos ────────────── */
+  --font-display: 'Cormorant Garamond', Garamond, 'Times New Roman', Georgia, serif;
+  --font-script:  'Great Vibes', 'Brush Script MT', 'Segoe Script', cursive;
+  --font-body:    'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
   /* ── Tamanhos fluidos ───────────────────────────── */
   --text-xs:   clamp(0.7rem,  1.2vw,  0.825rem);

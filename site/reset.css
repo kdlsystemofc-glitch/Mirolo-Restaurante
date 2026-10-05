@@ -19,6 +19,9 @@ html {
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  color-scheme: light;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -28,6 +31,7 @@ body {
   background-color: #F7EFE1;
   line-height: 1.6;
   overflow-x: hidden;
+  max-width: 100%;
   /* Textura de linho artesanal cru real com fibras e nós orgânicos */
   background-image: url('assets/texture-linen.webp');
   background-repeat: repeat;
@@ -65,6 +69,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: absolute;
   z-index: 10;
   pointer-events: none;
+  -webkit-backdrop-filter: blur(0.8px);
   backdrop-filter: blur(0.8px);
   /* Pontas denteadas rasgadas à mão */
   clip-path: polygon(

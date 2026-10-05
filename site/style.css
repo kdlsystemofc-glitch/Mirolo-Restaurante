@@ -24,6 +24,7 @@
   padding-top: var(--space-3);
   padding-bottom: 0;
   overflow: hidden;
+  overflow-x: clip;
 }
 
 .hero__inner {
@@ -110,6 +111,7 @@
   display: flex;
   justify-content: center;
   box-shadow: inset 0 10px 22px rgba(0, 0, 0, 0.42);
+  overflow-x: clip;
 }
 
 .hero__composition {
@@ -243,11 +245,11 @@
     padding: 6px 8px;
   }
   .recipe-note--left {
-    left: 0%;
+    left: 8px;
     bottom: 5px;
   }
   .recipe-note--right {
-    right: 0%;
+    right: 8px;
     top: 5px;
   }
 }
@@ -259,6 +261,7 @@
 .bolinho {
   padding-block: var(--space-8);
   position: relative;
+  overflow-x: clip;
 }
 
 .cookbook-wrapper {
@@ -513,6 +516,13 @@
   display: block;
 }
 
+@media (max-width: 1100px) {
+  .peeking-sketch {
+    right: -20px;
+    width: clamp(180px, 22vw, 240px);
+  }
+}
+
 @media (max-width: 860px) {
   .peeking-sketch {
     display: none;
@@ -526,6 +536,7 @@
 .buffet {
   padding-block: var(--space-8);
   position: relative;
+  overflow-x: clip;
 }
 
 .polaroid-cascade {
@@ -631,6 +642,7 @@
 .depoimentos {
   padding-block: var(--space-8);
   position: relative;
+  overflow-x: clip;
 }
 
 .reviews-row {
@@ -745,6 +757,7 @@
 ════════════════════════════════════════════════════ */
 .footer {
   width: 100%;
+  overflow-x: clip;
 }
 
 /* Faixa superior terracota decorativa */
@@ -798,14 +811,22 @@
   color: var(--c-text-body);
   text-decoration: underline;
   text-underline-offset: 3px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: 4px;
 }
 
-/* Botão [ RESERVAR ALMOÇO // WHATSAPP ] */
+/* Botão [ RESERVAR ALMOÇO // WHATSAPP ] com alvo mínimo 44x44px */
 .footer__btn-reserve {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
   border: 1.5px solid var(--c-text-body);
   border-radius: var(--radius-pill);
-  padding: 8px 24px;
+  padding: 10px 24px;
   background: rgba(255, 253, 249, 0.4);
   font-family: var(--font-body);
   font-size: var(--text-xs);

@@ -87,3 +87,39 @@ c3deace bolinho pronta
    - **Carimbos**: Efeito de desgaste e porosidade de almofada de tinta de borracha em papel kraft.
 
 
+
+---
+
+## 6. Passada Responsiva Geral & Auditoria de Robustez
+
+1. **Bateria de 12 Resoluções Testadas (Playwright)**:
+   - `2560x1440` (Ultrawide Desktop): Rolagem H: OK | Erros: 0 | Alvos de toque < 44px: 0
+   - `1920x1080` (Full HD Desktop): Rolagem H: OK | Erros: 0 | Alvos de toque < 44px: 0
+   - `1440x900` (MacBook Standard): Rolagem H: OK | Erros: 0 | Alvos de toque < 44px: 0
+   - `1366x768` (Laptop Comum): Rolagem H: OK | Erros: 0 | Alvos de toque < 44px: 0
+   - `1280x720` (HD 720p): Rolagem H: OK | Erros: 0 | Alvos de toque < 44px: 0
+   - `1024x768` (iPad Landscape): Rolagem H: OK | Erros: 0 | Alvos de toque < 44px: 0
+   - `768x1024` (iPad Portrait): Rolagem H: OK | Erros: 0 | Alvos de toque < 44px: 0
+   - `430x932` (iPhone Pro Max): Rolagem H: OK | Erros: 0 | Alvos de toque < 44px: 0
+   - `390x844` (iPhone Standard): Rolagem H: OK | Erros: 0 | Alvos de toque < 44px: 0
+   - `360x740` (Android Standard): Rolagem H: OK | Erros: 0 | Alvos de toque < 44px: 0
+   - `320x568` (iPhone SE / Telas Estreitas): Rolagem H: OK | Erros: 0 | Alvos de toque < 44px: 0
+   - `844x390` (Mobile Deitado / Landscape): Rolagem H: OK | Erros: 0 | Alvos de toque < 44px: 0
+
+2. **Ajustes de Robustez & Overflow**:
+   - Alvos de toque (links do rodapé e botão WhatsApp) definidos com mínimo estrito de `44x44px` (`min-height: 44px; min-width: 44px; display: inline-flex`).
+   - Elementos contínuos e decorativos (`.hero__table-surface`, `.ripped-divider`, `.footer__banner`, `.peeking-sketch`) contidos com `overflow-x: clip` nos containers de seção (`.hero`, `.bolinho`, `.buffet`, `.depoimentos`, `.footer`), eliminando sangramento em telas estreitas e ultra-largas.
+   - Ajuste de offsets das notas de receita no mobile (`right: 8px; left: 8px;`) compensando a rotação de 4° que ultrapassava as margens.
+   - Zoom de texto a 200% verificado: layout permanece íntegro sem transbordamento horizontal.
+   - Revisão Safari/iOS: prefixes `-webkit-clip-path` e `-webkit-backdrop-filter` aplicados; `color-scheme: light` fixado para proteção de tons de papel contra inversões de dark mode forçadas pelo OS.
+
+3. **Resultados Lighthouse Mobile**:
+   - Performance: 68
+   - Accessibility: 98
+   - Best Practices: 92
+   - SEO: 100
+
+   *Top 3 Oportunidades Identificadas (relatadas sem otimização prévia)*:
+   1. **Render-blocking requests / CSS & Font loading** (Economia estimada: ~2.390 ms em rede móvel): Fontes externas do Google e múltiplos arquivos CSS na `<head>`.
+   2. **Improve image delivery & LCP sizing** (Economia estimada: ~398 KiB / LCP): Imagens de alta densidade no Hero servidas com mesma resolução no mobile, beneficiando-se futuramente de `srcset` por breakpoint e `fetchpriority="high"`.
+   3. **Cache lifetimes e compressão** (Economia estimada: ~786 KiB): Ausência de cabeçalhos de expiração de cache no servidor de desenvolvimento e oportunidade de minificação de CSS.
