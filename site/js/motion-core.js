@@ -50,35 +50,14 @@
   }
 
   /**
-   * Inicializa o Lenis Smooth Scroll
+   * Scroll 100% Nativo e Suave (Sem sequestro de roda do mouse)
    */
   function initLenis() {
-    if (STATE.mode === 'reduced' || STATE.quality === 'low' || !window.Lenis) {
-      return;
-    }
-
-    try {
-      const lenis = new Lenis({
-        duration: 1.15,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        smoothWheel: true,
-        wheelMultiplier: 0.95,
-        touchMultiplier: 1.0
-      });
-
-      lenis.on('scroll', ScrollTrigger.update);
-
-      gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-      });
-
-      gsap.ticker.lagSmoothing(0);
-      STATE.lenis = lenis;
-    } catch (e) {
-      console.warn('Mirolo Motion: inicialização do Lenis falhou, usando scroll nativo:', e);
-    }
+    // O scroll nativo do navegador garante 60-120fps fluidos, sem inércia pesada nem travamentos.
+    STATE.lenis = null;
+    return;
   }
+
 
   /**
    * Gerenciador de Pausa / Retomada
@@ -161,27 +140,12 @@
         return;
       }
 
-      // Modo Full: translateY + fade
+      // Elementos acima da dobra: já renderizados com estabilidade pelo HTML/CSS estático.
+      // Nunca forçar opacity: 0 retrospectiva para não causar glitch, piscada ou falsa sensação de lentidão.
       if (isAboveFold) {
-        if (STATE.quality === 'low') {
-          // Em qualidade 'low' (mobile / hardware restrito), elementos acima da dobra
-          // permanecem com renderização nativa imediata (zero dependência de JS / zero LCP delay)
-          return;
-        }
-
-        // Acima da dobra: entrada suave após carregamento
-        gsap.fromTo(el,
-          { opacity: 0, y: yOffset },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.75,
-            delay: delay,
-            ease: 'power2.out',
-            clearProps: 'transform,opacity'
-          }
-        );
-      } else {
+        return;
+      }
+ else {
         // Abaixo da dobra: gatilho a 35% de visibilidade (top 75%)
         gsap.fromTo(el,
           { opacity: 0, y: yOffset },

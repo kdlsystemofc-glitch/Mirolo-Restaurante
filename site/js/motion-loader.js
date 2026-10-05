@@ -48,11 +48,12 @@
     initMotion();
   }
 
-  const interactionEvents = ['pointerdown', 'touchstart', 'keydown', 'wheel', 'scroll'];
+  const interactionEvents = ['pointerdown', 'touchstart', 'keydown'];
 
   interactionEvents.forEach(evt => {
     window.addEventListener(evt, triggerInit, { once: true, passive: true });
   });
+
 
   function scheduleInit() {
     if ('requestIdleCallback' in window) {

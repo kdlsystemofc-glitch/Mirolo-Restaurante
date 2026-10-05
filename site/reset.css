@@ -18,11 +18,11 @@
 html {
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
   color-scheme: light;
   overflow-x: hidden;
   max-width: 100%;
 }
+
 
 body {
   font-family: var(--font-body);
@@ -82,9 +82,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: absolute;
   z-index: 10;
   pointer-events: none;
-  -webkit-backdrop-filter: blur(0.8px);
-  backdrop-filter: blur(0.8px);
   /* Pontas denteadas rasgadas à mão */
+
   clip-path: polygon(
     0% 0%, 100% 0%,
     97% 20%, 100% 40%, 96% 60%, 100% 80%, 97% 100%,
