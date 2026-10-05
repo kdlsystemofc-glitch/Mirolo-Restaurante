@@ -147,3 +147,46 @@ c3deace bolinho pronta
    - `scripts/test-motion-base.js` executado com 100% de sucesso.
    - 0 erros no console, 0 rolagem horizontal em 6 resoluções de referência (2560px a 320px).
    - Pontuação Lighthouse pós-base: Performance 66 (delta de apenas -2 pontos, dentro da tolerância de 3 pontos).
+
+---
+
+## 8. Fase 2 de Motion Concluída — Animações Seção por Seção
+
+Todas as 5 seções foram animadas e validadas individualmente com commits isolados:
+1. **Hero (`ae8d36c hero motion pronta`)**:
+   - Logo, badge e headline revelados com leve translateY e fade.
+   - Notas de receita pousando e iniciando micro-flutuação lenta em `high quality`.
+   - Carimbo de cortesia com sutil parallax e transição limpa.
+2. **Bolinho (`7b78dfb bolinho motion pronta`)**:
+   - Caderno secreto com abertura e elevação suave.
+   - Recibo amarelo com flutuação sutil; badge de 26+ menções e carimbo do chef com entrada escalonada.
+   - Esboço a lápis (`peeking-sketch`) com parallax sutil (0.08) deslizando por trás da página.
+3. **Buffet (`cd291fd buffet motion pronta`)**:
+   - Tag de seção e cascata de 7 Polaroids com revelação escalonada a 35% de visibilidade.
+   - Rotações em CSS (`--rot`) preservadas pelo GSAP durante e após a interpolação.
+4. **Depoimentos (`42d5995 depoimentos motion pronta`)**:
+   - 3 cartões de caderno pousando com seus respectivos ângulos naturais.
+   - Carimbo redondo de 615 reviews com leve profundidade parallax.
+5. **Footer (`4dc210a footer motion pronta`)**:
+   - Endereço, telefone e botão WhatsApp com reveal suave.
+   - Faixa terracota contínua mantida 100% estática e imutável.
+
+---
+
+## 9. Fase 3 de Motion Concluída — Coerência, Inventário e Pausa (Tag: `motion-pronto`)
+
+1. **Botão de Pausa Acessível**:
+   - Componente `.motion-toggle` adicionado (fixo no canto inferior direito, alvo de toque >= 44x44px, contraste WCAG aprovado, suporte a teclado).
+   - Alterna instantaneamente o estado da página entre congelamento (`data-motion-paused`) e reprodução fluida.
+2. **Inventário & Orçamento de Loops (`motion-inventario.md`)**:
+   - 29 animações catalogadas com propriedades, gatilhos e comportamento em movimento reduzido.
+   - Orçamento estrito: máximo de 2 loops simultâneos no pico (Hero), caindo para 1 ou 0 nas demais seções via `IntersectionObserver`.
+3. **Gravação e Auditoria de Vídeo**:
+   - Script `scripts/record-motion-coherence.js` gravou a rolagem completa em `screenshots/video/motion-coherence.webm`.
+   - Ritmo suave e consistente de leitura, sem saltos bruscos ou seções apressadas/agitadas.
+4. **Pontuações Lighthouse Consolidadas**:
+   - **Performance**: 66 (Baseline: 68 -> Delta final de apenas -2 pontos)
+   - **Accessibility**: 98
+   - **Best Practices**: 92
+   - **SEO**: 100
+   - **CLS**: 0.00 | **TBT**: 70ms

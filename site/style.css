@@ -843,3 +843,56 @@
 .footer__btn-reserve:active {
   transform: scale(0.98);
 }
+
+/* ════════════════════════════════════════════════════
+   § 06 — CONTROLE ACESSÍVEL DE MOTION (WCAG 2.2)
+════════════════════════════════════════════════════ */
+.motion-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 8px 16px;
+  border: 1.5px solid var(--c-brown-dark);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 253, 249, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--c-brown-dark);
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, box-shadow 150ms ease;
+  user-select: none;
+}
+.motion-toggle:hover {
+  background: var(--c-brown-dark);
+  color: #FFFDF9;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+}
+.motion-toggle:focus-visible {
+  outline: 2px solid var(--c-terracotta);
+  outline-offset: 3px;
+}
+.motion-toggle.is-paused {
+  background: #FFF0ED;
+  border-color: var(--c-terracotta);
+  color: var(--c-terracotta);
+}
+
+@media (max-width: 480px) {
+  .motion-toggle {
+    bottom: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    font-size: 0.7rem;
+  }
+}
+
