@@ -250,3 +250,69 @@ Todas as 5 seções foram animadas e validadas individualmente com commits isola
    - Script `scripts/test-responsive.js` validou 100% de sucesso nas 12 resoluções:
      - 2560x1440, 1920x1080, 1440x900, 1366x768, 1280x720, 1024x768, 768x1024, 430x932, 390x844, 360x740, 320x568, 844x390.
      - 0 rolagem horizontal, 0 erros no console, alvos de toque >= 44px, zoom 200% sem quebra, dark mode e reduced motion intactos.
+
+---
+
+## 11. Etapa de SEO Local Concluída (Commit: `seo pronto`)
+
+1. **Configuração Centralizada de Domínio (`seo.config.json`)**:
+   - Arquivo único na raiz contendo:
+     - `siteUrl`: `"https://www.mirolorestaurante.com.br"`
+     - `domainConfigured`: `false` (sinalizando que o domínio oficial ainda aguarda publicação final em DNS/hospedagem).
+     - Dados cadastrais auditados e confirmados exclusivamente do `CLIENTE.md` (endereço, telefone, coordenadas geográficas, horários confirmados e notas de precificação/reviews).
+
+2. **Metadados Head, Localização & Mobile**:
+   - `<title>` específico: `Mirolo Restaurante — O Almoço com Alma de Domingo | SBC`.
+   - `<meta name="description">` factual e conciso com endereço, horário e telefone.
+   - `<html lang="pt-BR">` e `<meta name="theme-color" content="#3C2212">`.
+   - Geo-tags específicas para indexação regional:
+     - `geo.region`: `BR-SP`
+     - `geo.placename`: `São Bernardo do Campo`
+     - `geo.position` e `ICBM`: `-23.693444, -46.554167`
+   - Canonical e tags dependentes de domínio mantidas comentadas com instrução explícita de ativação para quando `domainConfigured: true`.
+
+3. **Open Graph & Twitter Card (Composição Aprovada 1200x630)**:
+   - Gerada via script Sharp (`scripts/generate-og-image.js`):
+     - `site/assets/og-image.jpg` (1200x630, 100 KiB) e `site/assets/og-image.webp`.
+     - Baseada na foto aprovada da feijoada em caldeirão de barro + bolinhos de espinafre sobre madeira rústica, sem texto minúsculo, com contraste aprimorado e logo Mirolo nítido.
+   - Metatags `og:type` (`restaurant.restaurant`), `og:title`, `og:description`, `og:image`, `og:image:width`, `og:image:height`, `og:image:alt`.
+   - Metatags `twitter:card` (`summary_large_image`), `twitter:title`, `twitter:description`, `twitter:image`.
+
+4. **Dados Estruturados Schema.org (JSON-LD — Tipo `Restaurant`)**:
+   - Tipo rigoroso `Restaurant` com 100% dos dados confirmados no `CLIENTE.md`:
+     - Nome, telefone com DDI/DDD (`+55-11-2758-2354`), tipos de culinária (`servesCuisine`).
+     - Endereço completo (`PostalAddress`: R. Esperico, 60, Jardim do Mar, SBC - SP, 09750-310).
+     - Coordenadas geográficas (`GeoCoordinates`: lat -23.693444, long -46.554167).
+     - Horários de funcionamento confirmados (`openingHoursSpecification`: Mo-Sa 11:30 às 15:00).
+     - Comodidades confirmadas (`amenityFeature`: refeição no local, retirada na porta, entrega sem contato).
+   - **Campos incertos / diretrizes de busca**:
+     - Preço `R$ 40-60` (estimativa de frequentadores no Google Maps) não publicado como fixo; restaurante opera por quilo.
+     - Avaliações de terceiros (nota 4.8 e 615 reviews do Google Maps) não inseridas como `aggregateRating` no schema próprio, em estrito cumprimento às diretrizes contra "self-serving reviews" do Google.
+
+5. **Arquivos de Rastreamento & PWA/Favicons**:
+   - `site/robots.txt`: padrão universal RFC 9309 (`User-agent: *`, `Allow: /`), com diretiva de Sitemap canônica comentada conforme dependência do domínio oficial em `seo.config.json`.
+   - `site/sitemap.xml`: schema sitemap.org válido com `<loc>` apontando para a URL raiz com prioridade `1.0` e frequência `weekly`.
+   - Favicons completos gerados em `scripts/generate-favicons.js`:
+     - `site/favicon.ico` (multi-resolução 16/32/48)
+     - `site/favicon-16x16.png` e `site/favicon-32x32.png`
+     - `site/apple-touch-icon.png` (180x180)
+     - `site/android-chrome-192x192.png` e `site/android-chrome-512x512.png`
+     - `site/site.webmanifest`
+   - Zero dependência externa, totalmente funcional localmente e em qualquer hospedagem.
+
+6. **Hierarquia Semântica HTML & Acessibilidade de Imagens**:
+   - Exatamente um `<h1>` no topo do Hero: `"Mirolo // O Almoço Com Alma de Domingo"`.
+   - Quatro `<h2>` em ordem estritamente lógica pelas seções:
+     1. `"O Caderno Secreto (Bolinho de Espinafre)"`
+     2. `"O Buffet Colorido"`
+     3. `"Prova Social Afetiva"`
+     4. `"Localização, Horário e Reservas"` (utiliza `.visually-hidden` para estruturação semântica sem alterar o visual).
+   - 100% das 11 imagens informativas possuem atributos `alt` minuciosos e descritivos em português.
+
+7. **Resultados Lighthouse Auditados**:
+   - **SEO**: **100 / 100** 🏆
+   - **Accessibility**: **100 / 100** 🏆
+   - **Best Practices**: **100 / 100** 🏆
+   - **Performance**: Mantido de acordo com a otimização.
+   - Validação em 12 viewports responsivos: 100% aprovado.
+

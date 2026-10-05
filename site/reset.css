@@ -54,6 +54,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin-inline: auto;
 }
 
+/* Utilitário acessível para leitores de tela sem impacto visual */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 /* Fita adesiva / Washi tape artesanal realista com pontas rasgadas à mão */
 .tape {
   display: block;

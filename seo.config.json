@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Configuração central de SEO, Domínio e Dados Locais do Mirolo Restaurante.",
+  "siteUrl": "https://www.mirolorestaurante.com.br",
+  "domainConfigured": false,
+  "notes": "Altere 'siteUrl' para o domínio oficial quando registrado e mude 'domainConfigured' para true para ativar canonical e og:url absolutas.",
+  "business": {
+    "name": "Mirolo Restaurante",
+    "legalName": "Mirolo Restaurante",
+    "description": "Restaurante self-service por quilo com culinária caseira em São Bernardo do Campo. Especialidades incluem feijoada completa, torresmo sequinho, bolinho de espinafre artesanal e sobremesa cortesia.",
+    "telephone": "+55-11-2758-2354",
+    "displayPhone": "(11) 2758-2354",
+    "servesCuisine": [
+      "Brasileira",
+      "Comida Caseira",
+      "Self-service por quilo",
+      "Bufê"
+    ],
+    "address": {
+      "streetAddress": "R. Esperico, 60",
+      "neighborhood": "Jardim do Mar",
+      "addressLocality": "São Bernardo do Campo",
+      "addressRegion": "SP",
+      "postalCode": "09750-310",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "plusCode": "8C6R+G5 Jardim do Mar, São Bernardo do Campo - SP",
+      "latitude": -23.693444,
+      "longitude": -46.554167
+    },
+    "openingHoursConfirmed": [
+      "Mo-Sa 11:30-15:00"
+    ],
+    "openingHoursNotes": "Abertura confirmada às 11:30 de segunda a sábado. Domingo fechado.",
+    "priceRangeEstimated": "R$ 40 - R$ 60 (estimativa de frequentadores no Google Maps; cobrança real por quilo)",
+    "attributes": [
+      "Refeição no local",
+      "Retirada na porta",
+      "Entrega sem contato",
+      "Empresa que acolhe a comunidade LGBTQ+",
+      "Empresa identificada de empreendedoras"
+    ]
+  },
+  "seo": {
+    "title": "Mirolo Restaurante — O Almoço com Alma de Domingo | São Bernardo do Campo",
+    "metaDescription": "Restaurante self-service por kg com comida caseira em São Bernardo do Campo. R. Esperico, 60 - Jardim do Mar. Segunda a sábado das 11:30 às 15:00. Tel: (11) 2758-2354.",
+    "themeColor": "#3C2212",
+    "locale": "pt_BR",
+    "ogImage": "assets/og-image.jpg"
+  }
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml — Mirolo Restaurante
+  Configurado a partir de seo.config.json.
+  Atualize a URL abaixo quando o domínio definitivo estiver registrado e ativo.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <!-- Placeholder dependente de seo.config.json -->
+    <loc>https://www.mirolorestaurante.com.br/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

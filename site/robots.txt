@@ -1,0 +1,10 @@
+# robots.txt — Mirolo Restaurante
+# Configurado via seo.config.json
+
+User-agent: *
+Allow: /
+
+# Diretiva de Sitemap dependente do domínio final (definido em seo.config.json):
+# Ao configurar o domínio em produção, descomente a URL canônica abaixo:
+# Sitemap: https://www.mirolorestaurante.com.br/sitemap.xml
+

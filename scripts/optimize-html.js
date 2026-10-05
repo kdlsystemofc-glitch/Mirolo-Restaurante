@@ -7,14 +7,61 @@ const HTML_FILE = path.join(SITE_DIR, 'index.html');
 const CRITICAL_CSS_FILE = path.join(SITE_DIR, 'critical.css');
 
 function optimizeHtml() {
-  console.log('⚡ Restaurando base limpa e aplicando otimizações em site/index.html...');
+  console.log('⚡ Aplicando SEO local completo e otimizações em site/index.html...');
 
   // Recupera o HTML completo original e íntegro do commit 568d89e3d
   let html = execSync('git show 568d89e3d:site/index.html', { encoding: 'utf8' });
   const criticalCss = fs.readFileSync(CRITICAL_CSS_FILE, 'utf8').trim();
 
-  // 1. Substituir bloco <head> de fontes e CSS
-  const headPreloadBlock = `  <!-- Preload de Fontes Críticas Acima da Dobra (WOFF2 Local) -->
+  // 1. Bloco de Cabeçalho Completo com SEO Local, Open Graph, Twitter Cards, JSON-LD, Favicons e CSS Crítico
+  const fullHeadBlock = `  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirolo Restaurante — O Almoço com Alma de Domingo | SBC</title>
+  <meta name="description" content="Restaurante self-service por kg com comida caseira em São Bernardo do Campo. R. Esperico, 60 - Jardim do Mar. Segunda a sábado das 11:30 às 15:00. Tel: (11) 2758-2354.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#3C2212">
+  <meta name="author" content="Mirolo Restaurante">
+
+  <!-- Metadados de SEO Local (Geolocalização SBC - Jardim do Mar) -->
+  <meta name="geo.region" content="BR-SP">
+  <meta name="geo.placename" content="São Bernardo do Campo">
+  <meta name="geo.position" content="-23.693444;-46.554167">
+  <meta name="ICBM" content="-23.693444, -46.554167">
+
+  <!-- Favicons e Web App Manifest -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- URL Canônica (Aguardando domínio final configurado em seo.config.json):
+       Ao apontar o domínio oficial em produção, descomente a linha abaixo: -->
+  <!-- <link rel="canonical" href="https://www.mirolorestaurante.com.br/"> -->
+
+  <!-- Open Graph / Facebook / WhatsApp (1200x630) -->
+  <meta property="og:type" content="restaurant.restaurant">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Mirolo Restaurante">
+  <meta property="og:title" content="Mirolo Restaurante — O Almoço com Alma de Domingo">
+  <meta property="og:description" content="Self-service por quilo com comida caseira de verdade em São Bernardo do Campo. R. Esperico, 60 - Jardim do Mar. Buffet variado e sobremesa cortesia.">
+  <meta property="og:image" content="assets/og-image.jpg">
+  <meta property="og:image:secure_url" content="assets/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mirolo Restaurante — Feijoada na panela de barro com torresmo e bolinhos de espinafre sobre mesa rústica">
+  <!-- Descomente og:url ao configurar o domínio oficial em seo.config.json: -->
+  <!-- <meta property="og:url" content="https://www.mirolorestaurante.com.br/"> -->
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mirolo Restaurante — O Almoço com Alma de Domingo">
+  <meta name="twitter:description" content="Self-service por quilo com comida caseira de verdade em São Bernardo do Campo. R. Esperico, 60 - Jardim do Mar. Buffet variado e sobremesa cortesia.">
+  <meta name="twitter:image" content="assets/og-image.jpg">
+  <meta name="twitter:image:alt" content="Mirolo Restaurante — Feijoada na panela de barro e buffet variado em São Bernardo do Campo">
+
+  <!-- Preload de Fontes Críticas Acima da Dobra (WOFF2 Local) -->
   <link rel="preload" href="fonts/cormorant-garamond-700-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/lato-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -26,6 +73,80 @@ function optimizeHtml() {
         fetchpriority="high">
   <link rel="preload" as="image" href="assets/texture-wood-table-480.webp" type="image/webp" media="(max-width: 768px)">
 
+  <!-- Dados Estruturados Schema.org (JSON-LD) — Tipo: Restaurant
+       Conformidade com CLIENTE.md e Diretrizes de Busca do Google:
+       1. Dados confirmados: nome, telefone, endereço, geolocalização e horários do almoço.
+       2. Preço: O valor 'R$ 40-60' é uma estimativa de clientes no Google Maps. Como o modelo do restaurante é buffet por quilo e não há tabela de preço fixo no CLIENTE.md, não foi publicado como definitivo.
+       3. Avaliações: A nota 4.8 com 615 reviews é originária do Google Maps (terceiros). aggregateRating não é autodeclarado para cumprir as diretrizes contra 'self-serving reviews' do Google.
+       4. Domínio e URLs: Usam o placeholder configurado em seo.config.json.
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Mirolo Restaurante",
+    "description": "Restaurante self-service por quilo com culinária caseira em São Bernardo do Campo. Especialidades incluem feijoada completa, torresmo sequinho, bolinho de espinafre artesanal e sobremesa cortesia.",
+    "image": [
+      "assets/og-image.jpg",
+      "assets/hero-food-1600.webp"
+    ],
+    "telephone": "+55-11-2758-2354",
+    "servesCuisine": [
+      "Brasileira",
+      "Comida Caseira",
+      "Self-service por quilo",
+      "Bufê"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "R. Esperico, 60",
+      "addressLocality": "São Bernardo do Campo",
+      "addressRegion": "SP",
+      "postalCode": "09750-310",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -23.693444,
+      "longitude": -46.554167
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "11:30",
+        "closes": "15:00"
+      }
+    ],
+    "acceptsReservations": "True",
+    "hasDriveThroughService": false,
+    "amenityFeature": [
+      {
+        "@type": "LocationFeatureSpecification",
+        "name": "Refeição no local",
+        "value": true
+      },
+      {
+        "@type": "LocationFeatureSpecification",
+        "name": "Retirada na porta",
+        "value": true
+      },
+      {
+        "@type": "LocationFeatureSpecification",
+        "name": "Entrega sem contato",
+        "value": true
+      }
+    ]
+  }
+  </script>
+
   <!-- CSS Crítico Inline (Zero Render-Blocking) -->
   <style id="critical-css">${criticalCss}</style>
 
@@ -33,9 +154,10 @@ function optimizeHtml() {
   <link rel="preload" href="style.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="style.min.css"></noscript>`;
 
+  // Substitui todo o cabeçalho inicial (do charset até o fechamento de links CSS)
   html = html.replace(
-    /<!-- Preconnect fonts -->[\s\S]*?<!-- CSS -->[\s\S]*?<link rel="stylesheet" href="style\.css">/,
-    headPreloadBlock
+    /<meta charset="UTF-8">[\s\S]*?<!-- CSS -->[\s\S]*?<link rel="stylesheet" href="style\.css">/,
+    fullHeadBlock
   );
 
   // 2. Otimizar foto Hero Food (LCP) com srcset e degraus
@@ -126,11 +248,17 @@ function optimizeHtml() {
     '</section>\n\n  </main><!-- /#main-content -->\n\n  <!-- ═══════════════════════════════════════════════\n       SEÇÃO 05 — FOOTER'
   );
 
-  // 7. Usar script motion-loader minificado
+  // 7. Adicionar h2 semântico acessível no rodapé para completar a hierarquia lógica
+  html = html.replace(
+    '<div class="container footer__inner">',
+    '<div class="container footer__inner">\n\n        <!-- Título de seção acessível para leitores de tela e robôs de busca -->\n        <h2 class="visually-hidden">Localização, Horário e Reservas</h2>'
+  );
+
+  // 8. Usar script motion-loader minificado
   html = html.replace('js/motion-loader.js', 'js/motion-loader.min.js');
 
   fs.writeFileSync(HTML_FILE, html);
-  console.log(`✅ site/index.html restaurado e otimizado com sucesso! Total de linhas: ${html.split('\n').length}`);
+  console.log(`✅ site/index.html gerado com sucesso com SEO completo! Total de linhas: ${html.split('\n').length}`);
 }
 
 optimizeHtml();
