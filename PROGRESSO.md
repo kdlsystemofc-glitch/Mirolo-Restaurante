@@ -123,3 +123,27 @@ c3deace bolinho pronta
    1. **Render-blocking requests / CSS & Font loading** (Economia estimada: ~2.390 ms em rede móvel): Fontes externas do Google e múltiplos arquivos CSS na `<head>`.
    2. **Improve image delivery & LCP sizing** (Economia estimada: ~398 KiB / LCP): Imagens de alta densidade no Hero servidas com mesma resolução no mobile, beneficiando-se futuramente de `srcset` por breakpoint e `fetchpriority="high"`.
    3. **Cache lifetimes e compressão** (Economia estimada: ~786 KiB): Ausência de cabeçalhos de expiração de cache no servidor de desenvolvimento e oportunidade de minificação de CSS.
+
+---
+
+## 7. Fase 1 de Motion Concluída — Base Global (Tag: `motion-base`)
+
+1. **Baseline Documentado**:
+   - Criado `motion-baseline.md` com pontuações pré-motion (Lighthouse Mobile 68/98/92/100).
+2. **Bibliotecas Auto-hospedadas (Zero CDN)**:
+   - `site/vendor/gsap.min.js`
+   - `site/vendor/ScrollTrigger.min.js`
+   - `site/vendor/lenis.min.js` e `lenis.css`
+3. **Núcleo de Motion Construído**:
+   - `site/js/motion-loader.js`: Carregamento diferido após `window.load` ou na primeira interação do usuário (`pointerdown`, `touchstart`, `scroll`), garantindo zero impacto bloqueante.
+   - `site/js/motion-core.js`: Sistema completo contendo:
+     - 3 modos: `full`, `reduced` (via `prefers-reduced-motion: reduce`) e `paused` (via API / botão).
+     - Qualidade adaptativa (`high` vs `low`) avaliando `hardwareConcurrency`, `deviceMemory`, `saveData` e largura de tela.
+     - Smooth scroll com Lenis integrado ao ticker do GSAP e ScrollTrigger (somente em `high` e `full`).
+     - Sistema unificado de atributos: `data-reveal`, `data-parallax` e `data-loop`.
+     - Gerenciamento de abas: pausa automática via `visibilitychange` quando a aba fica oculta.
+     - Pausa de micro-loops fora da viewport via `IntersectionObserver`.
+4. **Validação & Regressão**:
+   - `scripts/test-motion-base.js` executado com 100% de sucesso.
+   - 0 erros no console, 0 rolagem horizontal em 6 resoluções de referência (2560px a 320px).
+   - Pontuação Lighthouse pós-base: Performance 66 (delta de apenas -2 pontos, dentro da tolerância de 3 pontos).
