@@ -43,15 +43,18 @@
           Mirolo // O Almoço<br>
           Com Alma de Domingo
         </h1>
-        <!-- PENDÊNCIA-CLIENTE: Slogan de referência do mockup; validar se adota este ou o da fachada ("Comida Caseira. Venha Experimentar.") -->
       </div>
 
-      <!-- Composição central com prato e receitas -->
+    </div><!-- /.hero__inner -->
+
+    <!-- Bancada de madeira rústica com o prato e receitas -->
+    <div class="hero__table-surface">
       <div class="hero__composition">
 
-        <!-- Nota esquerda (Receita) -->
+        <!-- Nota esquerda (Receita com mancha de café e borda rasgada) -->
         <aside class="recipe-note lined-paper recipe-note--left" aria-hidden="true">
-          <span class="tape" style="top:-10px; left:25%; transform:rotate(-3deg);"></span>
+          <span class="tape" style="top:-12px; left:25%; transform:rotate(-4deg);"></span>
+          <span class="tape" style="bottom:-10px; right:15px; transform:rotate(-8deg);"></span>
           <p class="recipe-note__title">Recipe de família</p>
           <ul class="recipe-note__list">
             <li>Feijoada completa</li>
@@ -60,23 +63,24 @@
             <li>Bolinho de espinafre</li>
           </ul>
           <p class="recipe-note__author">by Chef Robson D'Vieira</p>
+          <div class="recipe-note__stain"></div>
         </aside>
 
-        <!-- Prato central hero -->
+        <!-- Prato central hero (Perspectiva 35° assentado na madeira) -->
         <div class="hero__food-img-wrap">
           <picture>
             <source media="(min-width: 800px)" srcset="assets/hero-food-1600.webp" type="image/webp">
             <img src="assets/hero-food-800.webp"
-                 alt="Feijoada completa servida na panela de barro com torresmo e bolinhos de espinafre"
+                 alt="Feijoada completa servida na panela de barro com torresmo e bolinhos de espinafre sobre mesa de madeira rústica"
                  loading="eager"
                  fetchpriority="high"
-                 width="800" height="600">
+                 width="800" height="450">
           </picture>
         </div>
 
         <!-- Nota direita (Receita do chef) -->
         <aside class="recipe-note lined-paper recipe-note--right" aria-hidden="true">
-          <span class="tape" style="top:-10px; right:20%; transform:rotate(5deg);"></span>
+          <span class="tape" style="top:-12px; right:20%; transform:rotate(5deg);"></span>
           <p class="recipe-note__title">Receita do chef</p>
           <ul class="recipe-note__list">
             <li>1 dose de amor</li>
@@ -92,8 +96,17 @@
         </div>
 
       </div><!-- /.hero__composition -->
+    </div><!-- /.hero__table-surface -->
 
-    </div><!-- /.hero__inner -->
+    <!-- Borda divisória de papel rasgado separando o Hero da Seção 2 -->
+    <div class="ripped-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 30" preserveAspectRatio="none" width="100%" height="24">
+        <!-- Papel creme rasgado sobre a madeira: ondas artesanais suaves de fibra -->
+        <path d="M0,12 Q60,6 120,13 Q180,7 240,14 Q300,6 360,13 Q420,7 480,14 Q540,6 600,12 Q660,7 720,13 Q780,6 840,14 Q900,7 960,13 Q1020,6 1080,14 Q1140,7 1200,12 L1200,30 L0,30 Z" fill="#F7EFE1" />
+        <!-- Linha de fibra rasgada branca brilhante -->
+        <path d="M0,12 Q60,6 120,13 Q180,7 240,14 Q300,6 360,13 Q420,7 480,14 Q540,6 600,12 Q660,7 720,13 Q780,6 840,14 Q900,7 960,13 Q1020,6 1080,14 Q1140,7 1200,12" fill="none" stroke="rgba(255, 255, 255, 0.85)" stroke-width="1.5" />
+      </svg>
+    </div>
   </header>
 
 
@@ -110,68 +123,80 @@
       </header>
 
       <!-- Livro aberto de receitas -->
-      <div class="cookbook">
-        <span class="tape cookbook__tape-tl"></span>
-        <span class="tape cookbook__tape-tr"></span>
-        <span class="tape cookbook__tape-b"></span>
+      <div class="cookbook-wrapper">
 
-        <div class="cookbook__spread">
+        <div class="cookbook">
+          <span class="tape cookbook__tape-tl"></span>
+          <span class="tape cookbook__tape-tr"></span>
+          <span class="tape cookbook__tape-b"></span>
 
-          <!-- Página Esquerda: Foto do bolinho + recibo + badge -->
-          <div class="cookbook__page cookbook__page--left">
-            <div class="cookbook__photo-wrap">
-              <picture>
-                <source media="(min-width: 800px)" srcset="assets/bolinho-1600.webp" type="image/webp">
-                <img src="assets/bolinho-800.webp"
-                     alt="Bolinhos de espinafre quentes e fumegantes, servidos na tábua de madeira"
-                     loading="lazy"
-                     width="600" height="600">
-              </picture>
+          <div class="cookbook__spread">
 
-              <!-- Recibo de papel amarelo -->
-              <div class="receipt" aria-hidden="true">
-                <span class="receipt__title">Bakery Receipt</span>
-                <span class="receipt__line">Espinafre fresco</span>
-                <span class="receipt__line">Massa artesanal</span>
-                <span class="receipt__line">Feito na hora</span>
-                <div class="receipt__barcode"></div>
-              </div>
+            <!-- Página Esquerda: Foto do bolinho sangrada + recibo + badge -->
+            <div class="cookbook__page cookbook__page--left">
+              <div class="cookbook__photo-wrap">
+                <picture>
+                  <source media="(min-width: 800px)" srcset="assets/bolinho-1600.webp" type="image/webp">
+                  <img src="assets/bolinho-800.webp"
+                       alt="Bolinhos de espinafre quentes e fumegantes, servidos na tábua de madeira"
+                       loading="lazy"
+                       width="600" height="600">
+                </picture>
 
-              <!-- Badge 26+ menções no Google -->
-              <div class="mentions-badge" aria-label="Mais de 26 menções nas avaliações do Google">
-                <strong>26+ Menções</strong>
-                <span>no Google</span>
-              </div>
-            </div>
-          </div>
+                <!-- Recibo de papel amarelo -->
+                <div class="receipt" aria-hidden="true">
+                  <span class="tape" style="top:-8px; left:20%; transform:rotate(4deg);"></span>
+                  <span class="receipt__title">Bakery Receipt</span>
+                  <span class="receipt__line">Espinafre fresco</span>
+                  <span class="receipt__line">Massa artesanal</span>
+                  <span class="receipt__line">Feito na hora</span>
+                  <div class="receipt__barcode"></div>
+                </div>
 
-          <!-- Página Direita: Ingredientes secretos e citação -->
-          <div class="cookbook__page cookbook__page--right lined-paper">
-            <div class="cookbook__recipe-content">
-              <h3 class="cookbook__recipe-title">Secret ingredients</h3>
-
-              <ul class="cookbook__ingredients-list">
-                <li>Cesto de espinafre colhido no dia</li>
-                <li>Bolinho de espinafre moldado à mão</li>
-                <li>Massa crocante por fora, cremosa por dentro</li>
-                <li>Caldo caseiro com tempero de família</li>
-                <li>Amor e dedicação em cada fornada</li>
-              </ul>
-
-              <blockquote class="cookbook__quote">
-                "O bolinho de espinafre e o merengue de morango... são incríveis."
-                <cite>— Kelly Petrussi (Local Guide no Google)</cite>
-              </blockquote>
-
-              <!-- Carimbo RECEITA DO CHEF -->
-              <div class="cookbook__stamp stamp stamp--chef" aria-hidden="true">
-                Receita<br>do Chef
+                <!-- Badge 26+ menções no Google com acabamento chanfrado -->
+                <div class="mentions-badge" aria-label="Mais de 26 menções nas avaliações do Google">
+                  <strong>26+ Menções</strong>
+                  <span>no Google</span>
+                </div>
               </div>
             </div>
-          </div>
 
-        </div><!-- /.cookbook__spread -->
-      </div><!-- /.cookbook -->
+            <!-- Página Direita: Ingredientes secretos e citação -->
+            <div class="cookbook__page cookbook__page--right lined-paper">
+              <div class="cookbook__recipe-content">
+                <h3 class="cookbook__recipe-title">Secret ingredients</h3>
+
+                <ul class="cookbook__ingredients-list">
+                  <li>Cesto de espinafre colhido no dia</li>
+                  <li>Bolinho de espinafre moldado à mão</li>
+                  <li>Massa crocante por fora, cremosa por dentro</li>
+                  <li>Caldo caseiro com tempero de família</li>
+                  <li>Amor e dedicação em cada fornada</li>
+                </ul>
+
+                <blockquote class="cookbook__quote">
+                  "O bolinho de espinafre e o merengue de morango... são incríveis."
+                  <cite>— Kelly Petrussi (Local Guide no Google)</cite>
+                </blockquote>
+
+                <!-- Carimbo RECEITA DO CHEF -->
+                <div class="cookbook__stamp stamp stamp--chef" aria-hidden="true">
+                  Receita<br>do Chef
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /.cookbook__spread -->
+        </div><!-- /.cookbook -->
+
+        <!-- Folha de rascunho espiral que vaza por trás da página direita -->
+        <aside class="peeking-sketch" aria-hidden="true">
+          <img src="assets/recipe-sketch-500.webp"
+               alt="Rascunho de receitas com ingredientes desenhados"
+               width="280" height="380">
+        </aside>
+
+      </div><!-- /.cookbook-wrapper -->
 
     </div>
   </section>
@@ -189,80 +214,80 @@
         </h2>
       </header>
 
-      <!-- Carrossel / grid de polaroids de fotos reais -->
-      <div class="polaroid-row">
+      <!-- Cascata contínua de 7 Polaroids reais sobrepostas -->
+      <div class="polaroid-cascade">
 
-        <!-- Polaroid 1: Salada Colorida -->
-        <figure class="polaroid polaroid--tilt-left" style="--rot: -2.5deg;">
+        <!-- Polaroid 1: Chef braços cruzados -->
+        <figure class="polaroid" style="--rot: -4deg; --z: 1;">
           <span class="pushpin pushpin--wood"></span>
           <div class="polaroid__img-wrap">
-            <picture>
-              <source media="(min-width: 800px)" srcset="assets/buffet-salada-1600.webp" type="image/webp">
-              <img src="assets/buffet-salada-800.webp"
-                   alt="Buffet de saladas coloridas com verduras frescas, cebola roxa e legumes"
-                   loading="lazy" width="400" height="400">
-            </picture>
+            <img src="assets/chef-arms-crossed-600.webp"
+                 alt="Chef Robson D'Vieira no restaurante Mirolo"
+                 loading="lazy" width="300" height="300">
           </div>
-          <figcaption class="polaroid__caption">Salad Bar Fresco</figcaption>
         </figure>
 
-        <!-- Polaroid 2: Chef Robson Merengue -->
-        <figure class="polaroid polaroid--tilt-right polaroid--highlight" style="--rot: 2deg;">
+        <!-- Polaroid 2: Salad Bar Fresco -->
+        <figure class="polaroid" style="--rot: 2.5deg; --z: 2;">
           <span class="pushpin pushpin--red"></span>
           <div class="polaroid__img-wrap">
-            <picture>
-              <source media="(min-width: 800px)" srcset="assets/chef-merengue-1600.webp" type="image/webp">
-              <img src="assets/chef-merengue-800.webp"
-                   alt="Chef Robson D'Vieira com travessa de merengue com morangos frescos"
-                   loading="lazy" width="400" height="400">
-            </picture>
+            <img src="assets/buffet-salada-600.webp"
+                 alt="Salad bar colorido e fresco do Mirolo"
+                 loading="lazy" width="300" height="300">
           </div>
-          <figcaption class="polaroid__caption">Chef Robson D'Vieira</figcaption>
         </figure>
 
-        <!-- Polaroid 3: Pratos Quentes -->
-        <figure class="polaroid polaroid--tilt-left" style="--rot: -1.5deg;">
+        <!-- Polaroid 3: Chef apresentando Merengue -->
+        <figure class="polaroid polaroid--highlight" style="--rot: -1.5deg; --z: 3;">
           <span class="pushpin pushpin--wood"></span>
           <div class="polaroid__img-wrap">
-            <picture>
-              <source media="(min-width: 800px)" srcset="assets/buffet-quentes-1600.webp" type="image/webp">
-              <img src="assets/buffet-quentes-800.webp"
-                   alt="Buffet de pratos quentes com carnes, feijoada e torresmo"
-                   loading="lazy" width="400" height="400">
-            </picture>
+            <img src="assets/chef-merengue-600.webp"
+                 alt="Chef Robson com o famoso merengue de morango cortesia"
+                 loading="lazy" width="300" height="300">
           </div>
-          <figcaption class="polaroid__caption">Pratos Quentes</figcaption>
         </figure>
 
-        <!-- Polaroid 4: Chef Fachada Externa -->
-        <figure class="polaroid polaroid--tilt-right" style="--rot: 3deg;">
+        <!-- Polaroid 4: Buffet Quentes -->
+        <figure class="polaroid" style="--rot: 3.5deg; --z: 4;">
           <span class="pushpin pushpin--red"></span>
           <div class="polaroid__img-wrap">
-            <picture>
-              <source media="(min-width: 800px)" srcset="assets/chef-blue-ext-1600.webp" type="image/webp">
-              <img src="assets/chef-blue-ext-800.webp"
-                   alt="Chef na entrada do restaurante Mirolo pronto para receber os clientes"
-                   loading="lazy" width="400" height="400">
-            </picture>
+            <img src="assets/buffet-quentes-600.webp"
+                 alt="Buffet de pratos quentes e feijoada"
+                 loading="lazy" width="300" height="300">
           </div>
-          <figcaption class="polaroid__caption">Bem-vindo ao Mirolo</figcaption>
         </figure>
 
-        <!-- Polaroid 5: Torresmo Sequinho -->
-        <figure class="polaroid polaroid--tilt-left" style="--rot: -2deg;">
+        <!-- Polaroid 5: Chef Fachada Externa -->
+        <figure class="polaroid" style="--rot: -3deg; --z: 5;">
           <span class="pushpin pushpin--wood"></span>
           <div class="polaroid__img-wrap">
-            <picture>
-              <source media="(min-width: 800px)" srcset="assets/buffet-torresmo-1600.webp" type="image/webp">
-              <img src="assets/buffet-torresmo-800.webp"
-                   alt="Porção de torresmo sequinho e crocante servido no buffet"
-                   loading="lazy" width="400" height="400">
-            </picture>
+            <img src="assets/chef-blue-ext-600.webp"
+                 alt="Fachada e recepção acolhedora do Mirolo"
+                 loading="lazy" width="300" height="300">
           </div>
-          <figcaption class="polaroid__caption">Torresmo Crocante</figcaption>
         </figure>
 
-      </div><!-- /.polaroid-row -->
+        <!-- Polaroid 6: Torresmo Crocante -->
+        <figure class="polaroid" style="--rot: 2deg; --z: 6;">
+          <span class="pushpin pushpin--red"></span>
+          <div class="polaroid__img-wrap">
+            <img src="assets/buffet-torresmo-600.webp"
+                 alt="Porção de torresmo sequinho e crocante"
+                 loading="lazy" width="300" height="300">
+          </div>
+        </figure>
+
+        <!-- Polaroid 7: Sobremesas da Casa -->
+        <figure class="polaroid" style="--rot: -2deg; --z: 7;">
+          <span class="pushpin pushpin--wood"></span>
+          <div class="polaroid__img-wrap">
+            <img src="assets/sobremesas-600.webp"
+                 alt="Variedade de sobremesas caseiras"
+                 loading="lazy" width="300" height="300">
+          </div>
+        </figure>
+
+      </div><!-- /.polaroid-cascade -->
 
     </div>
   </section>
@@ -280,12 +305,12 @@
         </h2>
       </header>
 
-      <!-- Cartões de depoimentos estilo caderno com fita adesiva -->
+      <!-- Cartões de depoimentos estilo caderno com fita adesiva nos cantos -->
       <div class="reviews-row">
 
         <!-- Depoimento 1: João Vitor Malafaia -->
-        <article class="review-card lined-paper" style="--rot: -2deg;">
-          <span class="tape review-card__tape"></span>
+        <article class="review-card lined-paper" style="--rot: -2.5deg;">
+          <span class="tape review-card__tape-tl"></span>
           <div class="review-card__header">
             <span class="review-card__type">Recipe note</span>
             <span class="review-card__rating">4.8 Google stars</span>
@@ -298,7 +323,7 @@
 
         <!-- Depoimento 2: Kelly Petrussi (destaque central com carimbo circular 615 reviews) -->
         <article class="review-card lined-paper review-card--featured" style="--rot: 1deg;">
-          <span class="tape review-card__tape"></span>
+          <span class="tape review-card__tape-tc"></span>
           <div class="review-card__header">
             <span class="review-card__type">Recipe review</span>
             <span class="review-card__rating">4.8 Google stars</span>
@@ -308,7 +333,7 @@
           </blockquote>
           <cite class="review-card__author">- Kelly Petrussi (Local Guide)</cite>
 
-          <!-- Carimbo redondo 615 reviews -->
+          <!-- Carimbo redondo 615 reviews com textura de borracha -->
           <div class="review-card__stamp-round stamp stamp--round" aria-hidden="true">
             <span style="font-size: 0.65rem; line-height: 1;">SOBREMESA</span>
             <strong style="font-size: 1.15rem; font-weight: 700; line-height: 1;">615</strong>
@@ -317,8 +342,8 @@
         </article>
 
         <!-- Depoimento 3: Maria Fernanda Lisauskas -->
-        <article class="review-card lined-paper" style="--rot: -1.5deg;">
-          <span class="tape review-card__tape"></span>
+        <article class="review-card lined-paper" style="--rot: 2.5deg;">
+          <span class="tape review-card__tape-tr"></span>
           <div class="review-card__header">
             <span class="review-card__type">Recipe review</span>
             <span class="review-card__rating">615 reviews</span>
@@ -345,10 +370,8 @@
   ══════════════════════════════════════════════════ -->
   <footer id="footer-main" class="footer" role="contentinfo">
 
-    <!-- Faixa superior terracota -->
-    <div class="footer__banner">
-      <span>FOOTER</span>
-    </div>
+    <!-- Faixa superior terracota decorativa -->
+    <div class="footer__banner" aria-hidden="true"></div>
 
     <!-- Corpo inferior em madeira clara -->
     <div class="footer__body">

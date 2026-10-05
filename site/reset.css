@@ -25,15 +25,19 @@ body {
   font-family: var(--font-body);
   font-weight: 400;
   color: var(--c-text-body);
-  background-color: var(--c-cream);
+  background-color: #ECE3D0;
   line-height: 1.6;
   overflow-x: hidden;
-  /* Fundo sutil de tecido/papel texturizado */
+  /* Textura de linho rústico e tecido canvas entrelaçado (100% CSS puro) */
   background-image:
-    radial-gradient(#d8ccba 0.75px, transparent 0.75px),
-    radial-gradient(#d8ccba 0.75px, var(--c-cream) 0.75px);
-  background-size: 24px 24px;
-  background-position: 0 0, 12px 12px;
+    linear-gradient(45deg, rgba(195, 178, 150, 0.22) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(195, 178, 150, 0.22) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(195, 178, 150, 0.22) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(195, 178, 150, 0.22) 75%),
+    repeating-linear-gradient(0deg, rgba(135, 105, 75, 0.04) 0px, rgba(135, 105, 75, 0.04) 1px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(90deg, rgba(135, 105, 75, 0.04) 0px, rgba(135, 105, 75, 0.04) 1px, transparent 1px, transparent 3px);
+  background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 3px 3px, 3px 3px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px, 0 0, 0 0;
 }
 
 img, picture, video {
@@ -52,68 +56,72 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin-inline: auto;
 }
 
-/* Fita adesiva / Masking tape */
+/* Fita adesiva / Masking tape realista */
 .tape {
   display: block;
-  width: 72px;
-  height: 22px;
-  background: rgba(228, 204, 153, 0.75);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  width: 76px;
+  height: 24px;
+  background: rgba(228, 206, 155, 0.78);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.14);
   border-radius: 1px;
   position: absolute;
-  z-index: 5;
+  z-index: 10;
   pointer-events: none;
+  backdrop-filter: blur(0.5px);
 }
 .tape::before, .tape::after {
   content: '';
   position: absolute;
   top: 0; bottom: 0;
-  width: 4px;
-  background: repeating-linear-gradient(to bottom, transparent, transparent 2px, rgba(160,130,80,0.15) 2px, rgba(160,130,80,0.15) 4px);
+  width: 5px;
+  background: repeating-linear-gradient(to bottom, transparent, transparent 2px, rgba(150,120,70,0.2) 2px, rgba(150,120,70,0.2) 4px);
 }
 .tape::before { left: 0; }
 .tape::after { right: 0; }
 
-/* Carimbo estilizado (Stamp) */
+/* Carimbo estilizado com aspecto de tinta envelhecida */
 .stamp {
   display: inline-block;
-  border: 2.5px solid var(--c-red-stamp);
+  border: 3px solid var(--c-red-stamp);
   color: var(--c-red-stamp);
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 5px 10px;
-  border-radius: 3px;
+  padding: 6px 12px;
+  border-radius: 4px;
   font-size: var(--text-xs);
   line-height: 1.15;
   text-align: center;
-  box-shadow: 0 0 0 1px rgba(168, 35, 30, 0.2);
+  box-shadow: 0 0 0 1px rgba(168, 35, 30, 0.25);
   user-select: none;
   opacity: 0.88;
+  mask-image: radial-gradient(circle at 50% 50%, black 80%, rgba(0,0,0,0.6) 100%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 80%, rgba(0,0,0,0.6) 100%);
 }
 
 .stamp--round {
   border-radius: 50%;
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4px;
+  padding: 6px;
+  border-width: 2.5px;
 }
 
-/* Folha de caderno pautada */
+/* Folha de caderno pautada realista */
 .lined-paper {
-  background-color: var(--c-paper);
+  background-color: #FFFDF9;
   background-image: repeating-linear-gradient(
     transparent,
     transparent 23px,
-    rgba(195, 180, 160, 0.45) 23px,
-    rgba(195, 180, 160, 0.45) 24px
+    rgba(180, 195, 215, 0.55) 23px,
+    rgba(180, 195, 215, 0.55) 24px
   );
   background-size: 100% 24px;
-  box-shadow: var(--shadow-paper);
+  box-shadow: 0 6px 20px rgba(50, 30, 15, 0.16), 0 1px 3px rgba(0,0,0,0.08);
   border-radius: 2px;
 }

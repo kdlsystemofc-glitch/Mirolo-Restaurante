@@ -52,7 +52,22 @@ c3deace bolinho pronta
 
 ---
 
-## 3. O que falta (Próximas Etapas)
+---
 
-1. Validação com o cliente das pendências documentadas (WhatsApp definitivo, aprovação do slogan, logo em vetor/alta resolução).
-2. Fase de motion/animações interativas (quando aprovado o layout estático).
+## 4. Rodada de Refinamento Visual & Texturas Táteis (Fidelidade Máxima ao Mockup)
+
+1. **Novos Plates Integrados**:
+   - `plate-hero-perspective.jpg`: Foto em perspectiva 35° da feijoada em caldeirão de barro sobre madeira rústica, com torresmo sequinho, bolinhos e laranjas cortadas. Substituiu a foto aérea plana anterior.
+   - `plate-recipe-sketch.jpg`: Folha espiral pautada com croquis e ilustrações culinárias a lápis (panela, folha de louro, cebola, alho), vazando por trás do livro de receitas aberto na Seção 2.
+2. **Texturas & Camadas**:
+   - Padrão de tecido linho/canvas orgânico aplicado via CSS em todo o fundo do site.
+   - Fita crepe adesiva artesanal com fibras translúcidas e chanfros nas bordas.
+   - Carimbos com efeito estêncil e textura de borracha desgastada.
+   - Divisória de papel rasgado artesanal (deckle edge) em SVG com ondas suaves e sombra suave superior, fazendo a transição perfeita entre a bancada de madeira do Hero e a Seção 2.
+3. **Tratamento das Imagens do Buffet**:
+   - Corte dos 12% inferiores das fotos para eliminação completa das marcas d'água/logos do Instagram.
+   - Gradação de cor com saturação (+25%) e brilho (+6%) para realçar o frescor das saladas e o dourado dos pratos quentes.
+   - Disposição em cascata de 7 Polaroids sobrepostas com tachinhas 3D vermelhas e de madeira.
+4. **Remoção de Placeholders**:
+   - Faixa terracota do rodapé convertida em friso decorativo limpo, eliminando o texto placeholder "FOOTER".
+

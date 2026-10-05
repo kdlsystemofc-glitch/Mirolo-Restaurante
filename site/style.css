@@ -1,6 +1,5 @@
 /* style.css — Mirolo Restaurante
-   Mobile-first, unidades fluidas (clamp), sem dependência de nada de /design.
-   Fiel ao mockup de referência. */
+   Fiel ao modelo de referência com camadas táteis, texturas e integração orgânica. */
 
 /* ── Tags de Seção (Estilo Mockup) ───────────────── */
 .section-tag {
@@ -21,19 +20,10 @@
 ════════════════════════════════════════════════════ */
 .hero {
   position: relative;
-  background-color: var(--c-cream);
-  background: linear-gradient(
-    to bottom,
-    #FBF6EB 0%,
-    #F7EFE1 55%,
-    #E8CCA8 55%,
-    #C89F70 75%,
-    #9B7144 100%
-  );
+  background-color: #F7EFE1;
   padding-top: var(--space-3);
-  padding-bottom: var(--space-8);
+  padding-bottom: 0;
   overflow: hidden;
-  border-bottom: 1px solid rgba(100, 60, 20, 0.2);
 }
 
 .hero__inner {
@@ -41,6 +31,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  z-index: 2;
 }
 
 /* Barra superior: Logo e Badge */
@@ -50,7 +41,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
 .hero__logo {
@@ -76,7 +67,7 @@
   color: var(--c-text-body);
   text-align: center;
   line-height: 1.25;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 .hero__badge-label {
   display: block;
@@ -90,7 +81,7 @@
   color: var(--c-brown-dark);
 }
 
-/* Headline */
+/* Headline sempre sobre o fundo creme */
 .hero__headline-wrap {
   text-align: center;
   margin-bottom: var(--space-4);
@@ -106,50 +97,67 @@
   text-transform: uppercase;
 }
 
-/* Composição central da foto */
+/* Composição central da foto sobre o tampo de madeira rústica */
+.hero__table-surface {
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    #58351D 0%,
+    #452813 50%,
+    #2E180A 100%
+  );
+  padding-top: var(--space-4);
+  padding-bottom: 24px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
 .hero__composition {
   position: relative;
-  width: min(100%, 780px);
+  width: min(100%, 860px);
   margin-inline: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .hero__food-img-wrap {
   width: 100%;
-  max-width: 620px;
+  max-width: 740px;
   position: relative;
   z-index: 2;
-  filter: drop-shadow(0 15px 25px rgba(45, 20, 5, 0.45));
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
 }
 .hero__food-img-wrap img {
   width: 100%;
   height: auto;
-  border-radius: 4px;
+  display: block;
 }
 
-/* Cartões de receita nas laterais */
+/* Cartões de receita nas laterais com detalhes artesanais */
 .recipe-note {
   position: absolute;
-  width: clamp(140px, 20vw, 190px);
+  width: clamp(145px, 22vw, 205px);
   padding: var(--space-3);
-  z-index: 3;
+  z-index: 4;
 }
 .recipe-note--left {
   left: -2%;
-  bottom: 8%;
+  bottom: 12%;
   transform: rotate(-4deg);
 }
 .recipe-note--right {
   right: -2%;
-  top: 10%;
+  top: 14%;
   transform: rotate(4deg);
 }
 
 .recipe-note__title {
   font-family: var(--font-script);
-  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
   color: var(--c-brown-dark);
   line-height: 1.1;
   margin-bottom: 6px;
@@ -173,19 +181,49 @@
 .recipe-note__author {
   margin-top: 6px;
   font-family: var(--font-script);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--c-brown-mid);
+}
+
+/* Mancha de café / molho translúcida no papel */
+.recipe-note__stain {
+  position: absolute;
+  bottom: -5px;
+  left: 30px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(175, 140, 70, 0.38) 0%, rgba(175, 140, 70, 0.18) 55%, transparent 75%);
+  pointer-events: none;
+  filter: blur(1px);
 }
 
 /* Carimbo Sobremesa Cortesia */
 .hero__stamp {
   position: absolute;
-  right: 6%;
-  bottom: 4%;
-  z-index: 4;
-  transform: rotate(-8deg);
+  right: 5%;
+  bottom: 10%;
+  z-index: 5;
+  transform: rotate(-7deg);
   background: rgba(255, 253, 249, 0.95);
-  box-shadow: 0 4px 10px rgba(168, 35, 30, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+/* Divisória de Papel Rasgado entre Hero e Seção 2 */
+.ripped-divider {
+  width: 100%;
+  position: relative;
+  z-index: 6;
+  margin-top: -15px;
+  margin-bottom: -1px;
+  line-height: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 -3px 4px rgba(25, 12, 4, 0.28));
+}
+.ripped-divider svg {
+  display: block;
+  width: 100%;
+  height: 24px;
 }
 
 @media (max-width: 680px) {
@@ -199,28 +237,16 @@
     margin-top: var(--space-1);
   }
   .recipe-note {
-    width: clamp(115px, 32vw, 140px);
+    width: clamp(120px, 34vw, 150px);
     padding: 6px 8px;
-  }
-  .recipe-note__title {
-    font-size: 1.05rem;
-    margin-bottom: 2px;
-  }
-  .recipe-note__list {
-    font-size: 0.65rem;
-    line-height: 1.4;
-  }
-  .recipe-note__author {
-    font-size: 0.85rem;
-    margin-top: 3px;
   }
   .recipe-note--left {
     left: 0%;
-    bottom: -8px;
+    bottom: 5px;
   }
   .recipe-note--right {
     right: 0%;
-    top: -8px;
+    top: 5px;
   }
 }
 
@@ -233,14 +259,21 @@
   position: relative;
 }
 
+.cookbook-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
 .cookbook {
   position: relative;
   max-width: 860px;
-  margin-inline: auto;
+  margin-left: 0;
   border-radius: 6px;
-  background: #643D23;
+  background: #5A351B;
   padding: 8px;
-  box-shadow: 0 16px 40px rgba(35, 18, 8, 0.28);
+  box-shadow: 0 16px 40px rgba(35, 18, 8, 0.35);
+  z-index: 2;
 }
 
 .cookbook__tape-tl {
@@ -268,26 +301,27 @@
 
 @media (min-width: 768px) {
   .cookbook__spread {
-    grid-template-columns: 1.05fr 1fr;
+    grid-template-columns: 1.08fr 1fr;
   }
   .cookbook__spread::after {
     content: '';
     position: absolute;
     top: 0; bottom: 0;
-    left: 51.2%;
-    width: 14px;
+    left: 51.8%;
+    width: 16px;
     transform: translateX(-50%);
-    background: linear-gradient(to right, rgba(0,0,0,0.08), rgba(0,0,0,0.01) 35%, rgba(0,0,0,0.08));
+    background: linear-gradient(to right, rgba(0,0,0,0.12), rgba(0,0,0,0.02) 35%, rgba(0,0,0,0.12));
     pointer-events: none;
     z-index: 4;
   }
 }
 
-/* Página Esquerda: Foto */
+/* Página Esquerda: Foto sangrada */
 .cookbook__page--left {
-  padding: var(--space-4);
+  padding: 12px;
   position: relative;
   border-bottom: 1px solid #E0D5C3;
+  display: flex;
 }
 @media (min-width: 768px) {
   .cookbook__page--left {
@@ -298,15 +332,18 @@
 
 .cookbook__photo-wrap {
   position: relative;
+  width: 100%;
   border-radius: 2px;
   overflow: visible;
 }
 .cookbook__photo-wrap img {
   width: 100%;
+  height: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: 2px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  display: block;
 }
 
 /* Recibo amarelo (Bakery Receipt) */
@@ -317,12 +354,12 @@
   width: 110px;
   background: var(--c-paper-yellow);
   padding: 8px 6px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.22);
   font-family: var(--font-body);
   font-size: 0.65rem;
   color: #4A3E25;
   transform: rotate(-6deg);
-  z-index: 3;
+  z-index: 5;
 }
 .receipt__title {
   display: block;
@@ -349,21 +386,21 @@
   );
 }
 
-/* Badge 26+ Menções no Google */
+/* Badge 26+ Menções com acabamento chanfrado */
 .mentions-badge {
   position: absolute;
   bottom: 12px;
   left: 12px;
   background: #FFFDF9;
-  border: 1px solid #A8957A;
+  border: 1.5px solid #8C7355;
   border-radius: var(--radius-pill);
   padding: 6px 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25), inset 0 1px 2px #fff;
   font-family: var(--font-body);
   font-size: var(--text-xs);
   color: var(--c-brown-dark);
   text-align: center;
-  z-index: 3;
+  z-index: 5;
 }
 .mentions-badge strong {
   display: block;
@@ -437,76 +474,105 @@
   bottom: 0;
   right: 0;
   transform: rotate(8deg);
-  background: rgba(255, 253, 249, 0.9);
+  background: rgba(255, 253, 249, 0.92);
+}
+
+/* Folha de rascunho espiral que vaza por trás da página direita */
+.peeking-sketch {
+  position: absolute;
+  right: -55px;
+  top: 15px;
+  width: clamp(210px, 28vw, 300px);
+  transform: rotate(6.5deg);
+  z-index: 1;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.22));
+  pointer-events: none;
+}
+.peeking-sketch img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 860px) {
+  .peeking-sketch {
+    display: none;
+  }
 }
 
 
 /* ════════════════════════════════════════════════════
-   § 03 — O BUFFET COLORIDO
+   § 03 — O BUFFET COLORIDO (CASCATA DE POLAROIDS)
 ════════════════════════════════════════════════════ */
 .buffet {
   padding-block: var(--space-8);
   position: relative;
 }
 
-.polaroid-row {
+.polaroid-cascade {
   display: flex;
   flex-wrap: nowrap;
   gap: 0;
   overflow-x: auto;
-  padding-block: var(--space-4);
-  padding-inline: var(--space-3);
-  scrollbar-width: thin;
+  padding-block: var(--space-6);
+  padding-inline: var(--space-4);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
   justify-content: flex-start;
+  align-items: center;
+}
+.polaroid-cascade::-webkit-scrollbar {
+  display: none;
 }
 
-@media (min-width: 1024px) {
-  .polaroid-row {
+@media (min-width: 1200px) {
+  .polaroid-cascade {
     justify-content: center;
     overflow: visible;
   }
 }
 
-/* Polaroid Card */
+/* Polaroid Card sem moldura de legenda (puramente foto instantânea) */
 .polaroid {
-  flex: 0 0 clamp(190px, 24vw, 230px);
+  flex: 0 0 clamp(165px, 15vw, 205px);
   background: #FFFDF9;
   border-radius: 2px;
-  padding: 10px 10px 18px;
-  box-shadow: var(--shadow-polaroid);
+  padding: 8px 8px 26px 8px;
+  box-shadow: 0 10px 24px rgba(35, 18, 8, 0.22), 0 2px 6px rgba(0, 0, 0, 0.06);
   position: relative;
   transform: rotate(var(--rot, 0deg));
+  z-index: var(--z, 1);
   transition: transform 250ms ease, box-shadow 250ms ease, z-index 250ms ease;
   user-select: none;
-  margin-left: -15px;
+  margin-left: -36px;
 }
 .polaroid:first-child {
   margin-left: 0;
 }
 .polaroid:hover {
-  transform: rotate(0deg) scale(1.06);
-  box-shadow: 0 16px 36px rgba(35, 20, 12, 0.35);
-  z-index: 12;
+  transform: rotate(0deg) scale(1.10);
+  box-shadow: 0 18px 40px rgba(35, 18, 8, 0.42);
+  z-index: 20;
 }
 
-/* Pushpin (Tachinha) */
+/* Pushpin (Tachinha 3D com relevo e sombra) */
 .pushpin {
   display: block;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   position: absolute;
   top: 4px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.35);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.45);
 }
 .pushpin--wood {
-  background: radial-gradient(circle at 35% 35%, #E8D4BE, #B48D65, #7D5733);
+  background: radial-gradient(circle at 35% 35%, #F0DEC8, #B89269, #704820);
 }
 .pushpin--red {
-  background: radial-gradient(circle at 35% 35%, #FF7B72, #CF222E, #82071E);
+  background: radial-gradient(circle at 35% 35%, #FF8D85, #D92534, #7A0A18);
 }
 
 .polaroid__img-wrap {
@@ -520,19 +586,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.polaroid__caption {
-  font-family: var(--font-script);
-  font-size: clamp(0.95rem, 1.6vw, 1.25rem);
-  color: var(--c-brown-dark);
-  text-align: center;
-  margin-top: 10px;
-  line-height: 1.1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-inline: 4px;
+  display: block;
 }
 
 
@@ -570,13 +624,24 @@
 }
 .review-card:hover {
   transform: rotate(0deg) scale(1.02);
-  z-index: 4;
+  z-index: 6;
 }
 
-.review-card__tape {
+/* Fita adesiva nos cantos de forma casual */
+.review-card__tape-tl {
+  top: -10px;
+  left: -10px;
+  transform: rotate(-35deg);
+}
+.review-card__tape-tc {
   top: -10px;
   left: 50%;
-  transform: translateX(-50%) rotate(-2deg);
+  transform: translateX(-50%) rotate(2deg);
+}
+.review-card__tape-tr {
+  top: -10px;
+  right: -10px;
+  transform: rotate(35deg);
 }
 
 .review-card__header {
@@ -647,17 +712,12 @@
   width: 100%;
 }
 
-/* Faixa superior terracota */
+/* Faixa superior terracota decorativa */
 .footer__banner {
   background-color: var(--c-terracotta-bar);
-  color: #FFFDF9;
-  text-align: center;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  padding: 6px;
-  text-transform: uppercase;
+  height: 16px;
+  width: 100%;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.18);
 }
 
 /* Corpo inferior em madeira clara */
