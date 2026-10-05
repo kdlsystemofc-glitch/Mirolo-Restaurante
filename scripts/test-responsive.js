@@ -25,8 +25,9 @@ const VIEWPORTS = [
 ];
 
 async function runResponsiveTests() {
-  console.log('🚀 Iniciando bateria de testes responsivos em 12 resoluções...');
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({
+    args: ['--allow-file-access-from-files']
+  });
   const results = [];
 
   for (const vp of VIEWPORTS) {

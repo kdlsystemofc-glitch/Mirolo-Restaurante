@@ -190,3 +190,63 @@ Todas as 5 seções foram animadas e validadas individualmente com commits isola
    - **Best Practices**: 92
    - **SEO**: 100
    - **CLS**: 0.00 | **TBT**: 70ms
+
+---
+
+## 10. Etapa de Otimização Concluída — Performance Mobile 94 (Meta 90-92 Superada)
+
+1. **Resultados Lighthouse Mobile (Antes vs Depois)**:
+   | Métrica | Baseline (Pré-Otimização) | Otimizado (Final) | Ganho |
+   | :--- | :---: | :---: | :---: |
+   | **Performance Score** | **67** / 100 | **94** / 100 | **+27 pontos** 🚀 |
+   | **Accessibility** | 98 / 100 | **100** / 100 | +2 pontos (Perfeito) |
+   | **Best Practices** | 92 / 100 | **96** / 100 | +4 pontos |
+   | **SEO** | 100 / 100 | **100** / 100 | Mantido 100 |
+   | **First Contentful Paint (FCP)** | 3.8 s | **1.5 s** | -60% tempo |
+   | **Largest Contentful Paint (LCP)** | 5.8 s | **3.0 s** | -48% tempo |
+   | **Total Blocking Time (TBT)** | 70 ms | **0 ms** | 100% livre |
+   | **Cumulative Layout Shift (CLS)** | 0.00 | **0.00** | Impecável |
+   | **Speed Index** | 5.5 s | **2.0 s** | -63% tempo |
+
+2. **Fontes Tipográficas Locais (Zero Dependência Externa)**:
+   - Baixados subconjuntos `latin` e `latin-ext` em formato WOFF2 para `site/fonts/`:
+     - Cormorant Garamond 700 (~45 KiB total)
+     - Great Vibes 400 (~43 KiB total)
+     - Lato 400 & Lato 700 (~94 KiB total)
+   - Eliminados todos os links e preconnects do Google Fonts CDN.
+   - Declarado `@font-face` com `font-display: swap` e `unicode-range` em `site/fonts.css` e inlinado no CSS crítico.
+   - Preload estritamente das fontes críticas acima da dobra (`cormorant-garamond-700` e `lato-400`).
+
+3. **Arquitetura de CSS Crítico & Minificação**:
+   - Compilado `site/critical.css` (11 KiB) e inlinado diretamente no `<head>` do `site/index.html`.
+   - Gerado `site/style.min.css` (22 KiB) combinando tokens, reset, style e lenis minificados com preservação de fallbacks (`-webkit-mask`, `-webkit-clip-path`).
+   - Carregamento assíncrono não-bloqueante via `<link rel="preload" as="style">` com fallback `<noscript>`.
+
+4. **Imagens Responsivas & Otimização de Assets**:
+   - Degraus móveis gerados via Sharp:
+     - `hero-food-480.webp` (24 KiB), `hero-food-600.webp` (31 KiB), `hero-food-800.webp` (44 KiB), `hero-food-1200.webp` (90 KiB).
+     - `texture-wood-table-480.webp` (10 KiB) vs `texture-wood-table-1600.webp` (93 KiB).
+     - `bolinho-500.webp` (36 KiB) e `bolinho-800.webp` (61 KiB).
+     - 7 Polaroids em `-400.webp` (15-36 KiB vs 60-120 KiB originais).
+     - Textura de linho do body `texture-linen.webp` otimizada de 185 KiB para 42 KiB (-77%).
+   - `fetchpriority="high"` e `link rel="preload"` com `imagesrcset` calibrado aplicados exclusivamente no candidato a LCP.
+   - `loading="lazy"` e `decoding="async"` rigorosamente mantidos em todas as imagens abaixo da dobra.
+   - Background do Hero transformado em mobile-first, eliminando o download inútil da textura desktop de 93 KiB no mobile.
+
+5. **Minificação de JavaScript & Execução Cooperativa**:
+   - `motion-loader.js` (2.0 KiB -> `motion-loader.min.js`: 960 B, -54%).
+   - `motion-core.js` (9.3 KiB -> `motion-core.min.js`: 4.2 KiB, -54%).
+   - Carregamento assíncrono diferido com `requestIdleCallback` após o load e gatilho instantâneo na primeira interação (`pointerdown`, `scroll`, etc.).
+   - Em qualidade `low` (mobile), elementos acima da dobra mantêm renderização estática nativa instantânea, sem atraso de LCP e sem FOUC.
+
+6. **Semântica HTML & Acessibilidade**:
+   - Landmark `<main id="main-content">` adicionado envolvendo as seções centrais de conteúdo.
+   - Score de Acessibilidade elevado para **100/100**.
+
+7. **Guia de Cabeçalhos e Cache (`DEPLOY.md`)**:
+   - Criado documento detalhado com cabeçalhos HTTP agnósticos recomendados por tipo de arquivo (HTML com `must-revalidate`, WOFF2/Imagens com `max-age=31536000, immutable`, CSS/JS com `stale-while-revalidate`, compressão Brotli e CSP).
+
+8. **Validação Responsiva em 12 Resoluções**:
+   - Script `scripts/test-responsive.js` validou 100% de sucesso nas 12 resoluções:
+     - 2560x1440, 1920x1080, 1440x900, 1366x768, 1280x720, 1024x768, 768x1024, 430x932, 390x844, 360x740, 320x568, 844x390.
+     - 0 rolagem horizontal, 0 erros no console, alvos de toque >= 44px, zoom 200% sem quebra, dark mode e reduced motion intactos.

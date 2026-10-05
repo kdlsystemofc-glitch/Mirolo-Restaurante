@@ -163,6 +163,12 @@
 
       // Modo Full: translateY + fade
       if (isAboveFold) {
+        if (STATE.quality === 'low') {
+          // Em qualidade 'low' (mobile / hardware restrito), elementos acima da dobra
+          // permanecem com renderização nativa imediata (zero dependência de JS / zero LCP delay)
+          return;
+        }
+
         // Acima da dobra: entrada suave após carregamento
         gsap.fromTo(el,
           { opacity: 0, y: yOffset },

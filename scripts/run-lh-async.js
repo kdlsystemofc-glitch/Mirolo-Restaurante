@@ -15,7 +15,8 @@ const MIME_TYPES = {
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
   '.webp': 'image/webp',
-  '.svg': 'image/svg+xml'
+  '.svg': 'image/svg+xml',
+  '.woff2': 'font/woff2'
 };
 
 const server = http.createServer((req, res) => {
@@ -35,7 +36,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, '127.0.0.1', () => {
   console.log(`Server listening at http://127.0.0.1:${PORT}`);
-  const reportPath = path.join(__dirname, '..', 'screenshots', 'lighthouse-mobile.json');
+  const reportPath = path.join(__dirname, '..', 'screenshots', 'lighthouse-mobile-optimized.json');
 
   const args = [
     '--yes',
@@ -56,6 +57,27 @@ server.listen(PORT, '127.0.0.1', () => {
     console.log(`Lighthouse process exited with code ${code}`);
     server.close(() => {
       console.log('Server stopped.');
+      if (fs.existsSync(reportPath)) {
+        try {
+          const rep = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+          const p = Math.round(rep.categories.performance.score * 100);
+          const a = Math.round(rep.categories.accessibility.score * 100);
+          const b = Math.round(rep.categories['best-practices'].score * 100);
+          const s = Math.round(rep.categories.seo.score * 100);
+          const fcp = rep.audits['first-contentful-paint'] ? rep.audits['first-contentful-paint'].displayValue : 'N/A';
+          const lcp = rep.audits['largest-contentful-paint'] ? rep.audits['largest-contentful-paint'].displayValue : 'N/A';
+          const tbt = rep.audits['total-blocking-time'] ? rep.audits['total-blocking-time'].displayValue : 'N/A';
+          const cls = rep.audits['cumulative-layout-shift'] ? rep.audits['cumulative-layout-shift'].displayValue : 'N/A';
+          console.log('\n📊 === LIGHTHOUSE RESULTADOS OTIMIZADOS ===');
+          console.log(`Performance:    ${p}`);
+          console.log(`Accessibility:  ${a}`);
+          console.log(`Best Practices: ${b}`);
+          console.log(`SEO:            ${s}`);
+          console.log(`FCP: ${fcp} | LCP: ${lcp} | TBT: ${tbt} | CLS: ${cls}`);
+        } catch (e) {
+          console.error('Erro ao ler relatório Lighthouse:', e);
+        }
+      }
       process.exit(code);
     });
   });

@@ -34,7 +34,7 @@
       await loadScript('vendor/gsap.min.js');
       await loadScript('vendor/ScrollTrigger.min.js');
       await loadScript('vendor/lenis.min.js');
-      await loadScript('js/motion-core.js');
+      await loadScript('js/motion-core.min.js');
       
       if (window.MiroloMotion && typeof window.MiroloMotion.init === 'function') {
         window.MiroloMotion.init();
@@ -54,12 +54,17 @@
     window.addEventListener(evt, triggerInit, { once: true, passive: true });
   });
 
+  function scheduleInit() {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(initMotion, { timeout: 4000 });
+    } else {
+      setTimeout(initMotion, 3000);
+    }
+  }
+
   if (document.readyState === 'complete') {
-    // Se a página já terminou de carregar completamente, carregar no próximo tick
-    setTimeout(initMotion, 50);
+    scheduleInit();
   } else {
-    window.addEventListener('load', () => {
-      setTimeout(initMotion, 100);
-    }, { once: true });
+    window.addEventListener('load', scheduleInit, { once: true });
   }
 })();
