@@ -100,44 +100,103 @@
 }
 
 /*
- * Zona de bancada: Composição autêntica do modelo de referência
+ * Zona de bancada: Madeira rústica com elementos táteis separados em camadas
  */
 .hero__table-surface {
   width: 100%;
-  background-color: transparent;
+  background-color: #8C5A36;
   background-image: url('assets/wood-shelf-1920.webp');
-  background-size: 100% calc(100% - 32px);
+  background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding: 0;
+  padding-top: clamp(32px, 5vw, 64px);
+  padding-bottom: 0;
   overflow: visible;
 }
 
 .hero__composition {
   position: relative;
-  width: 100%;
-  max-width: 1360px;
+  width: min(100%, 1160px);
   margin-inline: auto;
   display: flex;
-  justify-content: center;
   align-items: flex-end;
+  justify-content: center;
+  padding-inline: var(--space-4);
   line-height: 0;
 }
 
-.hero__artwork-picture {
-  display: block;
-  width: 100%;
+/* Pratos Centrais com sombra de contato na mesa */
+.hero__dishes {
+  position: relative;
+  z-index: 3;
+  width: min(100%, 780px);
+  flex-shrink: 0;
+  filter: drop-shadow(0 14px 22px rgba(35, 18, 8, 0.45));
 }
-
-.hero__artwork-img {
+.hero__dishes img {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: contain;
+}
+
+/* Cartões de Receita Manuscritos Flutuantes */
+.hero__note {
+  position: absolute;
+  z-index: 4;
+  filter: drop-shadow(0 8px 18px rgba(30, 16, 8, 0.32));
+  pointer-events: auto;
+  transition: transform 300ms ease;
+}
+.hero__note img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Cartão da esquerda: Recipe de família */
+.hero__note--left {
+  left: 2%;
+  bottom: 8px;
+  width: clamp(140px, 20vw, 225px);
+  transform: rotate(-4deg);
+  transform-origin: center bottom;
+}
+.hero__note--left:hover {
+  transform: rotate(-2deg) scale(1.03);
+}
+
+/* Cartão da direita: Receita do chef */
+.hero__note--right {
+  right: 2%;
+  bottom: 20px;
+  width: clamp(130px, 18vw, 205px);
+  transform: rotate(4.5deg);
+  transform-origin: center bottom;
+}
+.hero__note--right:hover {
+  transform: rotate(2deg) scale(1.03);
+}
+
+/* Carimbo Sobremesa Cortesia no canto inferior direito */
+.hero__stamp {
+  position: absolute;
+  right: 5%;
+  bottom: 4px;
+  z-index: 5;
+  width: clamp(110px, 14vw, 155px);
+  transform: rotate(-7deg);
+  filter: drop-shadow(0 4px 10px rgba(130, 25, 20, 0.28));
+  user-select: none;
+  pointer-events: none;
+}
+.hero__stamp img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Divisória de Papel Rasgado entre Hero e Seção 2 */
@@ -167,6 +226,32 @@
     position: static;
     transform: none;
     margin-top: var(--space-1);
+  }
+  .hero__table-surface {
+    padding-top: 18px;
+  }
+  .hero__composition {
+    padding-inline: 4px;
+  }
+  .hero__dishes {
+    width: 95%;
+  }
+  .hero__note--left {
+    left: 4px;
+    bottom: 4px;
+    width: clamp(105px, 28vw, 135px);
+    transform: rotate(-3deg);
+  }
+  .hero__note--right {
+    right: 4px;
+    bottom: 14px;
+    width: clamp(95px, 25vw, 120px);
+    transform: rotate(3deg);
+  }
+  .hero__stamp {
+    right: 8px;
+    bottom: 0px;
+    width: 95px;
   }
 }
 
