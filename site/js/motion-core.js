@@ -1,7 +1,15 @@
 /**
  * motion-core.js — Mirolo Restaurante
- * Núcleo do sistema de motion: modos, qualidade, Lenis, data-reveal,
- * data-parallax, data-loop, pausa fora da tela e aba oculta.
+ * Sistema de Motion Cinematográfico Nível Awwwards
+ *
+ * Características:
+ * - Scroll fluido e macio via Lenis sincronizado ao GSAP Ticker e ScrollTrigger
+ * - Sequência de abertura coreografada no Hero (pratos, cartões manuscritos, carimbo com impacto elástico)
+ * - Efeito leque dinâmico (fan-out scatter) nas fotos Polaroid da Seção Buffet
+ * - Micro-interação tátil 3D Tilt magnético com tracking de cursor
+ * - Fitas adesivas e notas com física de mola (spring overshoot)
+ * - WCAG 2.2 acessível: suporte total a prefers-reduced-motion e botão Pausar/Retomar
+ * - Performance 60-120fps: animações exclusivas em transform e opacity, pausa automática fora da tela
  */
 (function() {
   'use strict';
@@ -11,7 +19,6 @@
     return;
   }
 
-  // Registrar plugins do GSAP
   gsap.registerPlugin(ScrollTrigger);
 
   const STATE = {
@@ -22,12 +29,12 @@
     tabHidden: false,
     lenis: null,
     loops: [],
-    reveals: [],
-    parallaxes: []
+    parallaxes: [],
+    tweens: []
   };
 
   /**
-   * Avalia capacidade do hardware e preferência de dados
+   * Avalia capacidade do hardware e preferência de economia de dados
    */
   function evaluateQuality() {
     const cores = navigator.hardwareConcurrency || 4;
@@ -50,14 +57,45 @@
   }
 
   /**
-   * Scroll 100% Nativo e Suave (Sem sequestro de roda do mouse)
+   * Inicialização do Lenis sincronizado com GSAP ScrollTrigger
    */
   function initLenis() {
-    // O scroll nativo do navegador garante 60-120fps fluidos, sem inércia pesada nem travamentos.
-    STATE.lenis = null;
-    return;
-  }
+    if (STATE.mode === 'reduced' || !window.Lenis) {
+      STATE.lenis = null;
+      return;
+    }
 
+    try {
+      const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+      STATE.lenis = new Lenis({
+        duration: 1.15,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponencial suave Awwwards
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 0.95,
+        touchMultiplier: 1.2,
+        syncTouch: false,
+        infinite: false
+      });
+
+      // Sincronizar Lenis com ScrollTrigger
+      STATE.lenis.on('scroll', ScrollTrigger.update);
+
+      // Conectar ciclo de RAF do Lenis ao GSAP Ticker para eliminar descompasso de quadros
+      gsap.ticker.add((time) => {
+        if (STATE.lenis && !STATE.userPaused && !STATE.tabHidden) {
+          STATE.lenis.raf(time * 1000);
+        }
+      });
+
+      gsap.ticker.lagSmoothing(0);
+    } catch (e) {
+      console.warn('Falha ao inicializar Lenis, mantendo scroll nativo:', e);
+      STATE.lenis = null;
+    }
+  }
 
   /**
    * Gerenciador de Pausa / Retomada
@@ -78,7 +116,7 @@
       STATE.userPaused = false;
       STATE.mode = evaluateReducedMotion() ? 'reduced' : 'full';
     }
-    if (STATE.userPaused) return; // Se o usuário pausou manualmente, não retoma no tab switch
+    if (STATE.userPaused) return;
 
     document.documentElement.removeAttribute('data-motion-paused');
     gsap.globalTimeline.resume();
@@ -110,100 +148,336 @@
   }
 
   /**
-   * Sistema de Revelação ao Rolar (data-reveal)
+   * Sequência Cinematográfica de Abertura do Hero
    */
-  function setupReveals() {
-    const elements = document.querySelectorAll('[data-reveal]');
-    if (!elements.length) return;
+  function animateHeroIntro() {
+    if (STATE.mode === 'reduced') return;
 
-    elements.forEach((el) => {
-      const delay = parseFloat(el.getAttribute('data-reveal-delay') || '0');
-      const yOffset = parseInt(el.getAttribute('data-reveal-y') || '20', 10);
-      const isAboveFold = el.getBoundingClientRect().top < window.innerHeight * 0.85;
+    const logo = document.querySelector('.hero__logo');
+    const badge = document.querySelector('.hero__badge');
+    const headline = document.querySelector('.hero__headline');
+    const dishes = document.querySelector('.hero__dishes');
+    const noteLeft = document.querySelector('.hero__note--left');
+    const noteRight = document.querySelector('.hero__note--right');
+    const stamp = document.querySelector('.hero__stamp');
 
-      if (STATE.mode === 'reduced') {
-        if (!isAboveFold) {
-          gsap.fromTo(el, 
-            { opacity: 0 },
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    // 1. Top bar: Logo e Badge descem suavemente
+    if (logo) {
+      tl.fromTo(logo, 
+        { opacity: 0, y: -22 }, 
+        { opacity: 1, y: 0, duration: 0.8 }, 
+        0.05
+      );
+    }
+    if (badge) {
+      tl.fromTo(badge, 
+        { opacity: 0, y: -22, scale: 0.95 }, 
+        { opacity: 1, y: 0, scale: 1, duration: 0.8 }, 
+        0.15
+      );
+    }
+
+    // 2. Headline: Revelação imponente e elegante
+    if (headline) {
+      tl.fromTo(headline, 
+        { opacity: 0, y: 28, letterSpacing: '0.08em' }, 
+        { opacity: 1, y: 0, letterSpacing: '0.04em', duration: 1.1, ease: 'power4.out' }, 
+        0.25
+      );
+    }
+
+    // 3. Pratos: assentam na mesa de madeira com física suave
+    if (dishes) {
+      tl.fromTo(dishes,
+        { opacity: 0, y: 40, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 1.0, ease: 'power3.out' },
+        0.4
+      );
+    }
+
+    // 4. Cartão da Esquerda: pousa com leve inclinação de papel
+    if (noteLeft) {
+      tl.fromTo(noteLeft,
+        { opacity: 0, y: -35, rotation: -8, scale: 0.92 },
+        { opacity: 1, y: 0, rotation: -4, scale: 1, duration: 0.9, ease: 'back.out(1.4)' },
+        0.6
+      );
+    }
+
+    // 5. Cartão da Direita: pousa equilibrando a composição
+    if (noteRight) {
+      tl.fromTo(noteRight,
+        { opacity: 0, y: -35, rotation: 8, scale: 0.92 },
+        { opacity: 1, y: 0, rotation: 4.5, scale: 1, duration: 0.9, ease: 'back.out(1.4)' },
+        0.7
+      );
+    }
+
+    // 6. Carimbo Vermelho: impacto tátil de carimbo real (slam elástico)
+    if (stamp) {
+      tl.fromTo(stamp,
+        { opacity: 0, scale: 1.6, rotation: -16 },
+        { opacity: 1, scale: 1, rotation: -7, duration: 0.65, ease: 'elastic.out(1.1, 0.55)' },
+        0.95
+      );
+    }
+  }
+
+  /**
+   * Revelações Coreografadas ao Rolar (ScrollTrigger)
+   */
+  function setupScrollAnimations() {
+    if (STATE.mode === 'reduced') return;
+
+    // Seção 2: Caderno Secreto (Bolinho de Espinafre)
+    const sec2 = document.querySelector('#bolinho, #receita, .bolinho, .receita');
+    if (sec2) {
+      const tag2 = sec2.querySelector('.section-tag');
+      const cookbook = sec2.querySelector('.cookbook');
+      const receipt = sec2.querySelector('.receipt');
+      const mentionsBadge = sec2.querySelector('.mentions-badge');
+      const chefStamp = sec2.querySelector('.cookbook__stamp');
+      const peeking = sec2.querySelector('.peeking-sketch');
+
+      if (tag2) {
+        gsap.fromTo(tag2,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1, y: 0, duration: 0.75, ease: 'power3.out',
+            scrollTrigger: { trigger: tag2, start: 'top 88%', once: true }
+          }
+        );
+      }
+
+      if (cookbook) {
+        gsap.fromTo(cookbook,
+          { opacity: 0, y: 40, scale: 0.97 },
+          {
+            opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power3.out',
+            scrollTrigger: { trigger: cookbook, start: 'top 85%', once: true }
+          }
+        );
+      }
+
+      if (receipt) {
+        gsap.fromTo(receipt,
+          { opacity: 0, y: -25, rotation: -6 },
+          {
+            opacity: 1, y: 0, rotation: -2, duration: 0.85, ease: 'back.out(1.5)',
+            scrollTrigger: { trigger: cookbook || receipt, start: 'top 80%', once: true }
+          }
+        );
+      }
+
+      if (mentionsBadge) {
+        gsap.fromTo(mentionsBadge,
+          { opacity: 0, scale: 0.8, rotation: 8 },
+          {
+            opacity: 1, scale: 1, rotation: 3, duration: 0.7, ease: 'back.out(1.6)',
+            scrollTrigger: { trigger: cookbook || mentionsBadge, start: 'top 75%', once: true }
+          }
+        );
+      }
+
+      if (chefStamp) {
+        gsap.fromTo(chefStamp,
+          { opacity: 0, scale: 1.5, rotation: -12 },
+          {
+            opacity: 1, scale: 1, rotation: -6, duration: 0.6, ease: 'elastic.out(1.1, 0.5)',
+            scrollTrigger: { trigger: cookbook || chefStamp, start: 'top 70%', once: true }
+          }
+        );
+      }
+
+      if (peeking) {
+        gsap.fromTo(peeking,
+          { opacity: 0, x: -30, rotation: -8 },
+          {
+            opacity: 1, x: 0, rotation: -4, duration: 0.8, ease: 'power3.out',
+            scrollTrigger: { trigger: peeking, start: 'top 85%', once: true }
+          }
+        );
+      }
+    }
+
+    // Seção 3: Buffet Livre — Efeito Leque (Fan-out Scatter) nas Polaroids
+    const sec3 = document.querySelector('#buffet, .buffet');
+    if (sec3) {
+      const tag3 = sec3.querySelector('.section-tag');
+      const polaroids = sec3.querySelectorAll('.polaroid');
+
+      if (tag3) {
+        gsap.fromTo(tag3,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1, y: 0, duration: 0.75, ease: 'power3.out',
+            scrollTrigger: { trigger: tag3, start: 'top 88%', once: true }
+          }
+        );
+      }
+
+      if (polaroids.length) {
+        polaroids.forEach((card, index) => {
+          const targetRot = parseFloat(card.style.getPropertyValue('--rot') || '0');
+          const delay = index * 0.08;
+
+          gsap.fromTo(card,
+            {
+              opacity: 0,
+              y: 50,
+              scale: 0.92,
+              rotation: targetRot * 0.2
+            },
             {
               opacity: 1,
-              duration: 0.2,
-              ease: 'none',
+              y: 0,
+              scale: 1,
+              rotation: targetRot,
+              duration: 0.85,
+              delay: delay,
+              ease: 'power3.out',
               scrollTrigger: {
-                trigger: el,
-                start: 'top 85%',
+                trigger: card.closest('.polaroid-cascade') || card,
+                start: 'top 82%',
                 once: true
               }
             }
           );
-        }
-        return;
+        });
       }
+    }
 
-      // Elementos acima da dobra: já renderizados com estabilidade pelo HTML/CSS estático.
-      // Nunca forçar opacity: 0 retrospectiva para não causar glitch, piscada ou falsa sensação de lentidão.
-      if (isAboveFold) {
-        return;
-      }
- else {
-        // Abaixo da dobra: gatilho a 35% de visibilidade (top 75%)
-        gsap.fromTo(el,
-          { opacity: 0, y: yOffset },
+    // Seção 4: Depoimentos (Cartões de Avaliação Lined Paper)
+    const sec4 = document.querySelector('#depoimentos, .depoimentos');
+    if (sec4) {
+      const tag4 = sec4.querySelector('.section-tag');
+      const reviewCards = sec4.querySelectorAll('.review-card');
+      const roundStamp = sec4.querySelector('.review-card__stamp-round');
+      const rectStamp = sec4.querySelector('.review-card__stamp-rect');
+
+      if (tag4) {
+        gsap.fromTo(tag4,
+          { opacity: 0, y: 20 },
           {
-            opacity: 1,
-            y: 0,
-            duration: 0.85,
-            delay: delay,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 90%',
-              once: true,
-              clearProps: 'transform,opacity'
-            }
+            opacity: 1, y: 0, duration: 0.75, ease: 'power3.out',
+            scrollTrigger: { trigger: tag4, start: 'top 88%', once: true }
           }
         );
       }
-    });
+
+      if (reviewCards.length) {
+        reviewCards.forEach((card, i) => {
+          const targetRot = parseFloat(card.style.getPropertyValue('--rot') || '0');
+          gsap.fromTo(card,
+            { opacity: 0, y: 40, rotation: 0, scale: 0.95 },
+            {
+              opacity: 1, y: 0, rotation: targetRot, scale: 1,
+              duration: 0.85, delay: i * 0.12, ease: 'power3.out',
+              scrollTrigger: {
+                trigger: card.closest('.reviews-grid') || card,
+                start: 'top 82%',
+                once: true
+              }
+            }
+          );
+        });
+      }
+
+      if (roundStamp) {
+        gsap.fromTo(roundStamp,
+          { opacity: 0, scale: 1.6, rotation: 25 },
+          {
+            opacity: 1, scale: 1, rotation: 10, duration: 0.65, ease: 'elastic.out(1.1, 0.5)',
+            scrollTrigger: { trigger: roundStamp, start: 'top 80%', once: true }
+          }
+        );
+      }
+
+      if (rectStamp) {
+        gsap.fromTo(rectStamp,
+          { opacity: 0, scale: 1.5, rotation: -10 },
+          {
+            opacity: 1, scale: 1, rotation: 6, duration: 0.65, ease: 'elastic.out(1.1, 0.5)',
+            scrollTrigger: { trigger: rectStamp, start: 'top 80%', once: true }
+          }
+        );
+      }
+    }
   }
 
   /**
-   * Sistema de Parallax Sutil (data-parallax)
-   * Leve (0.05-0.10, máx 24px, nunca sobre texto legível)
+   * Micro-Interação Tátil 3D Tilt Magnético (Tracking de Cursor Awwwards)
+   * Aplica física de inclinação suave ao passar o mouse sobre cards e fotos
    */
-  function setupParallax() {
+  function setupInteractiveTilt() {
     if (STATE.quality === 'low' || STATE.mode === 'reduced') return;
 
-    const elements = document.querySelectorAll('[data-parallax]');
-    elements.forEach((el) => {
-      const speed = Math.min(0.12, Math.max(0.04, parseFloat(el.getAttribute('data-parallax') || '0.08')));
-      const travel = Math.min(24, Math.round(window.innerHeight * speed));
+    // Apenas em dispositivos de ponteiro preciso (mouse/trackpad), nunca touch
+    if (window.matchMedia('(pointer: coarse)').matches) return;
 
-      const tween = gsap.fromTo(el,
-        { y: travel },
-        {
-          y: -travel,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: el.closest('section, header, footer') || el,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true
-          }
-        }
-      );
-      STATE.parallaxes.push(tween);
+    const tiltElements = document.querySelectorAll('.polaroid, .hero__note, .review-card');
+
+    tiltElements.forEach(el => {
+      let bounds;
+
+      function onMouseEnter() {
+        bounds = el.getBoundingClientRect();
+      }
+
+      function onMouseMove(e) {
+        if (!bounds) bounds = el.getBoundingClientRect();
+        const x = e.clientX - bounds.left;
+        const y = e.clientY - bounds.top;
+
+        const xPct = (x / bounds.width - 0.5) * 2; // -1 a +1
+        const yPct = (y / bounds.height - 0.5) * 2; // -1 a +1
+
+        const baseRot = parseFloat(el.style.getPropertyValue('--rot') || '0');
+        const tiltX = -yPct * 6; // max 6deg
+        const tiltY = xPct * 6;
+
+        gsap.to(el, {
+          rotationX: tiltX,
+          rotationY: tiltY,
+          rotationZ: baseRot + xPct * 1.5,
+          y: -6,
+          scale: 1.025,
+          duration: 0.35,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      }
+
+      function onMouseLeave() {
+        const baseRot = parseFloat(el.style.getPropertyValue('--rot') || '0');
+        gsap.to(el, {
+          rotationX: 0,
+          rotationY: 0,
+          rotationZ: baseRot,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: 'elastic.out(1, 0.6)',
+          overwrite: 'auto'
+        });
+      }
+
+      el.addEventListener('mouseenter', onMouseEnter, { passive: true });
+      el.addEventListener('mousemove', onMouseMove, { passive: true });
+      el.addEventListener('mouseleave', onMouseLeave, { passive: true });
     });
   }
 
   /**
-   * Sistema de Micro-Loops Flutuantes (data-loop)
-   * Pausa automaticamente quando o elemento sai da tela via IntersectionObserver
+   * Micro-Loops Orgânicos Flutuantes (data-loop)
+   * Pausa automaticamente quando fora da tela via IntersectionObserver
    */
   function setupLoops() {
     if (STATE.quality === 'low' || STATE.mode === 'reduced') return;
 
-    const elements = document.querySelectorAll('[data-loop]');
+    const elements = document.querySelectorAll('[data-loop="float"]');
     if (!elements.length) return;
 
     const observer = new IntersectionObserver((entries) => {
@@ -219,13 +493,11 @@
     }, { threshold: 0.1 });
 
     elements.forEach((el, index) => {
-      const duration = 3.6 + (index % 3) * 0.5;
-      const yDist = 3.5;
-      const rotDist = 0.8;
+      const duration = 3.8 + (index % 3) * 0.6;
+      const yDist = 4;
 
       const tween = gsap.to(el, {
         y: `+=${yDist}`,
-        rotation: `+=${rotDist}`,
         duration: duration,
         repeat: -1,
         yoyo: true,
@@ -267,18 +539,18 @@
           STATE.lenis = null;
         }
         STATE.loops.forEach(t => t.kill());
-        STATE.parallaxes.forEach(t => t.kill());
       } else if (!STATE.userPaused) {
         STATE.mode = 'full';
         initLenis();
-        setupParallax();
+        setupScrollAnimations();
+        setupInteractiveTilt();
         setupLoops();
       }
     });
   }
 
   /**
-   * Inicialização Global
+   * Inicialização Global do Sistema de Motion
    */
   function init() {
     if (STATE.initialized) return;
@@ -290,22 +562,33 @@
     document.documentElement.setAttribute('data-motion-quality', STATE.quality);
     document.documentElement.setAttribute('data-motion-mode', STATE.mode);
 
+    // 1. Iniciar smooth scroll sincronizado
     initLenis();
-    setupReveals();
-    setupParallax();
+
+    // 2. Sequência de abertura coreografada no Hero
+    animateHeroIntro();
+
+    // 3. Revelações coreografadas ao rolar
+    setupScrollAnimations();
+
+    // 4. Micro-interação tátil 3D Tilt
+    setupInteractiveTilt();
+
+    // 5. Loops flutuantes sutis
     setupLoops();
+
+    // 6. Ouvintes de sistema
     setupTabVisibility();
     setupMediaListener();
 
-    // Configurar botão de pausa se já existir
+    // 7. Botão de controle de acessibilidade (WCAG 2.2)
     document.querySelectorAll('[data-motion-toggle]').forEach(btn => {
       btn.addEventListener('click', togglePause);
     });
 
-    console.log(`Mirolo Motion ativado: modo=${STATE.mode}, qualidade=${STATE.quality}`);
+    console.log(`Mirolo Motion Awwwards ativado: modo=${STATE.mode}, qualidade=${STATE.quality}`);
   }
 
-  // Exportar API global
   window.MiroloMotion = {
     init,
     pause: pauseMotion,

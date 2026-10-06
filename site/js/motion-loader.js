@@ -56,16 +56,12 @@
 
 
   function scheduleInit() {
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(initMotion, { timeout: 4000 });
-    } else {
-      setTimeout(initMotion, 3000);
-    }
+    initMotion();
   }
 
-  if (document.readyState === 'complete') {
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
     scheduleInit();
   } else {
-    window.addEventListener('load', scheduleInit, { once: true });
+    window.addEventListener('DOMContentLoaded', scheduleInit, { once: true });
   }
 })();

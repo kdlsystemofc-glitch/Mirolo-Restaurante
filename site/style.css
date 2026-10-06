@@ -127,6 +127,7 @@
   justify-content: center;
   padding-inline: var(--space-4);
   line-height: 0;
+  perspective: 1200px;
 }
 
 /* Pratos Centrais com sombra de contato na mesa */
@@ -136,6 +137,8 @@
   width: min(100%, 780px);
   flex-shrink: 0;
   filter: drop-shadow(0 14px 22px rgba(35, 18, 8, 0.45));
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 .hero__dishes img {
   width: 100%;
@@ -149,7 +152,8 @@
   z-index: 4;
   filter: drop-shadow(0 8px 18px rgba(30, 16, 8, 0.32));
   pointer-events: auto;
-  transition: transform 300ms ease;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 .hero__note img {
   width: 100%;
@@ -165,9 +169,6 @@
   transform: rotate(-4deg);
   transform-origin: center bottom;
 }
-.hero__note--left:hover {
-  transform: rotate(-2deg) scale(1.03);
-}
 
 /* Cartão da direita: Receita do chef */
 .hero__note--right {
@@ -176,9 +177,6 @@
   width: clamp(130px, 18vw, 205px);
   transform: rotate(4.5deg);
   transform-origin: center bottom;
-}
-.hero__note--right:hover {
-  transform: rotate(2deg) scale(1.03);
 }
 
 /* Carimbo Sobremesa Cortesia no canto inferior direito */
@@ -562,6 +560,7 @@
   -webkit-overflow-scrolling: touch;
   justify-content: flex-start;
   align-items: center;
+  perspective: 1400px;
 }
 .polaroid-cascade::-webkit-scrollbar {
   display: none;
@@ -587,15 +586,16 @@
   position: relative;
   transform: rotate(var(--rot, 0deg));
   z-index: var(--z, 1);
-  transition: transform 250ms ease, box-shadow 250ms ease, z-index 250ms ease;
+  transition: box-shadow 250ms ease, z-index 250ms ease;
   user-select: none;
   margin-left: -36px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 .polaroid:first-child {
   margin-left: 0;
 }
 .polaroid:hover {
-  transform: rotate(0deg) scale(1.10);
   box-shadow: 0 18px 40px rgba(35, 18, 8, 0.42);
   z-index: 20;
 }
@@ -663,6 +663,7 @@
   gap: var(--space-4);
   max-width: 1060px;
   margin-inline: auto;
+  perspective: 1200px;
 }
 
 @media (min-width: 768px) {
@@ -676,13 +677,14 @@
   position: relative;
   padding: var(--space-4) var(--space-4) var(--space-6);
   transform: rotate(var(--rot, 0deg));
-  transition: transform 250ms ease;
   min-height: 220px;
   display: flex;
   flex-direction: column;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  user-select: none;
 }
 .review-card:hover {
-  transform: rotate(0deg) scale(1.02);
   z-index: 6;
 }
 
