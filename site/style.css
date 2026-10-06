@@ -85,8 +85,9 @@
 /* Headline sempre sobre o fundo de linho */
 .hero__headline-wrap {
   text-align: center;
-  margin-bottom: var(--space-4);
+  margin-bottom: 0;
   max-width: 900px;
+  padding-bottom: var(--space-4);
 }
 .hero__headline {
   font-family: var(--font-display);
@@ -98,130 +99,45 @@
   text-transform: uppercase;
 }
 
-/* Composição central da foto assentada naturalmente na bancada de madeira */
+/*
+ * Zona de bancada: Composição autêntica do modelo de referência
+ */
 .hero__table-surface {
   width: 100%;
-  background-color: #5A341A;
-  background-image: linear-gradient(to bottom, rgba(247, 239, 225, 0.5) 0%, rgba(247, 239, 225, 0) 18px), url('assets/texture-wood-table-480.webp');
-  background-size: 100% 18px, cover;
-  background-repeat: no-repeat, no-repeat;
-  background-position: center top, center top;
-  padding-top: 40px;
-  padding-bottom: 0;
+  background-color: transparent;
+  background-image: url('assets/wood-shelf-1920.webp');
+  background-size: 100% calc(100% - 32px);
+  background-position: center bottom;
+  background-repeat: no-repeat;
   position: relative;
   display: flex;
   justify-content: center;
-  box-shadow: none;
-  overflow: hidden;
-  overflow-x: clip;
+  align-items: flex-end;
+  padding: 0;
+  overflow: visible;
 }
 
-@media (min-width: 769px) {
-  .hero__table-surface {
-    background-image: linear-gradient(to bottom, rgba(247, 239, 225, 0.5) 0%, rgba(247, 239, 225, 0) 18px), url('assets/texture-wood-table-1600.webp');
-    padding-top: 52px;
-    padding-bottom: 0;
-  }
-}
-
-/* Composição ocupa toda a largura — igual ao modelo de referência */
 .hero__composition {
   position: relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1360px;
   margin-inline: auto;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  line-height: 0;
 }
 
-/* Foto sem max-width: sangra de ponta a ponta na zona de madeira */
-.hero__food-img-wrap {
+.hero__artwork-picture {
+  display: block;
   width: 100%;
-  max-width: 1100px;
-  position: relative;
-  z-index: 2;
-  border-radius: 0;
-  overflow: visible;
-  box-shadow: none;
-  /* Sem máscara oval: a madeira do prato funde-se naturalmente com a bancada */
 }
-.hero__food-img-wrap img {
+
+.hero__artwork-img {
   width: 100%;
   height: auto;
   display: block;
-}
-
-/* Cartões de receita cruzando o horizonte entre linho e madeira */
-.recipe-note {
-  position: absolute;
-  width: clamp(145px, 18vw, 210px);
-  padding: var(--space-3);
-  z-index: 4;
-}
-.recipe-note--left {
-  left: 2%;
-  top: -30px;
-  transform: rotate(-4deg);
-}
-.recipe-note--right {
-  right: 2%;
-  top: -16px;
-  transform: rotate(4deg);
-}
-
-.recipe-note__title {
-  font-family: var(--font-script);
-  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
-  color: var(--c-brown-dark);
-  line-height: 1.1;
-  margin-bottom: 6px;
-}
-.recipe-note__list {
-  font-family: var(--font-body);
-  font-size: clamp(0.7rem, 1.1vw, 0.775rem);
-  color: var(--c-text-muted);
-  line-height: 1.6;
-}
-.recipe-note__list li {
-  position: relative;
-  padding-left: 10px;
-}
-.recipe-note__list li::before {
-  content: "–";
-  position: absolute;
-  left: 0;
-  color: var(--c-terracotta);
-}
-.recipe-note__author {
-  margin-top: 6px;
-  font-family: var(--font-script);
-  font-size: 1.15rem;
-  color: var(--c-brown-mid);
-}
-
-/* Mancha de café / molho translúcida no papel */
-.recipe-note__stain {
-  position: absolute;
-  bottom: -5px;
-  left: 30px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(175, 140, 70, 0.38) 0%, rgba(175, 140, 70, 0.18) 55%, transparent 75%);
-  pointer-events: none;
-  filter: blur(1px);
-}
-
-/* Carimbo Sobremesa Cortesia */
-.hero__stamp {
-  position: absolute;
-  right: 5%;
-  bottom: 10%;
-  z-index: 5;
-  transform: rotate(-7deg);
-  background: rgba(255, 253, 249, 0.95);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  object-fit: contain;
 }
 
 /* Divisória de Papel Rasgado entre Hero e Seção 2 */
@@ -229,7 +145,7 @@
   width: 100%;
   position: relative;
   z-index: 6;
-  margin-top: -15px;
+  margin-top: -1px;
   margin-bottom: -1px;
   line-height: 0;
   pointer-events: none;
@@ -241,6 +157,7 @@
   height: 24px;
 }
 
+/* Responsivo: mobile */
 @media (max-width: 680px) {
   .hero__top-bar {
     flex-direction: column;
@@ -251,19 +168,18 @@
     transform: none;
     margin-top: var(--space-1);
   }
-  .recipe-note {
-    width: clamp(120px, 34vw, 150px);
-    padding: 6px 8px;
-  }
-  .recipe-note--left {
-    left: 8px;
-    bottom: 5px;
-  }
-  .recipe-note--right {
-    right: 8px;
-    top: 5px;
+}
+
+/* Responsivo: celular deitado */
+@media (max-width: 900px) and (orientation: landscape) {
+  .hero__table-surface {
+    aspect-ratio: auto;
+    min-height: 240px;
+    max-height: 55vw;
   }
 }
+
+
 
 
 /* ════════════════════════════════════════════════════

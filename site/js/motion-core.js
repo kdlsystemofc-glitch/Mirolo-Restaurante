@@ -157,7 +157,7 @@
             ease: 'power2.out',
             scrollTrigger: {
               trigger: el,
-              start: 'top 75%',
+              start: 'top 90%',
               once: true,
               clearProps: 'transform,opacity'
             }
